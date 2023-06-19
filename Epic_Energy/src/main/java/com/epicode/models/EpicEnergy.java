@@ -1,7 +1,6 @@
 package com.epicode.models;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 
@@ -18,9 +17,9 @@ public class EpicEnergy extends Company{
 	
 	@Bean
 	@Scope("singleton")
-	EpicEnergy epicEnergy() {
+	public static EpicEnergy epicEnergy() {
 		EpicEnergy e = new EpicEnergy();
-		e.vatNumber= "IT000122345";
+		e.vatNumber = "IT000122345";
 		e.legalName = "Epic Energy";
 		e.email = "epic@energy.com";
 		e.phone= "+39 3939928467";

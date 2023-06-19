@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class Province {
 	
 	@Id
-	private String abbreviations;
+	private String abbreviation;
 	
 	@Column(name = "province_name", nullable = false)
 	private String provinceName;

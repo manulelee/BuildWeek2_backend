@@ -5,46 +5,45 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.epicode.models.Address;
-import com.epicode.repository.AddressRepository;
+import com.epicode.models.Customer;
 import com.epicode.repository.CustomerRepository;
 
 @Service
 public class CustomerService {
 
-//	@Autowired private ClientRepository repository;
-//	
-//	public List<Address> getAllAddress(){
-//		return repository.findAll();
-//	}
-//	
-//	public Address getAddressById (Long id) {
-//		if (!repository.existsById(id)) {
-//			//gestione eccezione
-//		}
-//		return repository.findById(id).get();
-//	}
-//	
-//	public Address createAddress(Address address) {
-//		if (repository.findByStreetAndNumberAndLocalityAndZipCodeAndCity(address.getStreet(), address.getNumber(), address.getLocality(), address.getZipCode(), address.getCity())!= null) {
-//			//gestione eccezione
-//		}
-//		return repository.save(address);
-//	}
-//	
-//	public Address updateAddress (Long id, Address address) {
-//		if (!repository.existsById(id)) {
-//			//gestione eccezione
-//		}
-//		return repository.save(address);
-//	}
-//	
-//	public String removeAddress (Long id) {
-//		if (!repository.existsById(id)) {
-//			//gestione eccezione
-//		}
-//		repository.deleteById(id);
-//		return "Address removed";
-//	}
+	@Autowired private CustomerRepository repository;
+	
+	public List<Customer> getAllCustomers(){
+		return repository.findAll();
+	}
+	
+	public Customer getCustomerById (String vatNumber) {
+		if (!repository.existsById(vatNumber)) {
+			//gestione eccezione
+		}
+		return repository.findById(vatNumber).get();
+	}
+	
+	public Customer createCustomer(Customer customer) {
+		if (repository.findById(customer.getVatNumber())!= null) {
+			//gestione eccezione
+		}
+		return repository.save(customer);
+	}
+	
+	public Customer updateCustomer (String vatNumber, Customer customer) {
+		if (!repository.existsById(vatNumber)) {
+			//gestione eccezione
+		}
+		return repository.save(customer);
+	}
+	
+	public String removeCustomer (String vatNumber) {
+		if (!repository.existsById(vatNumber)) {
+			//gestione eccezione
+		}
+		repository.deleteById(vatNumber);
+		return "Address removed";
+	}
 	
 }
