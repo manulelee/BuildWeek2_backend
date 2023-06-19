@@ -1,17 +1,10 @@
 package com.epicode.models;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.epicode.enumerations.AddressType;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
-import jakarta.persistence.ManyToMany;
 
 
 @Entity
