@@ -1,4 +1,4 @@
-package com.epicode.Enumerations;
+package com.epicode.enumerations;
 
 public enum InvoiceState {
 	ACTIVE,
