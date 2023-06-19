@@ -1,7 +1,5 @@
 package com.epicode.service;
 
-import java.util.List; 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,19 +11,22 @@ public class EpicEnergyService {
 
 	@Autowired private EpicEnergyRepository repository;
 	
-	public List<EpicEnergy> getEpicEnergy(){
-		return repository.findAll();
-	}
-	
-//	public EpicEnergy getEpicEnergyById (String vatNumber) {
-//		if (!repository.existsById(vatNumber)) {
-//			//gestione eccezione
-//		}
-//		return repository.findById(vatNumber).get();
+//	public List<EpicEnergy> getEpicEnergy(){
+//		return repository.findAll();
 //	}
+	
+	public EpicEnergy getEpicEnergy () {
+		if (!repository.existsById("IT000122345")) {
+			//gestione eccezione
+		}
+		return repository.findById("IT000122345").get();
+	}
 	
 	public EpicEnergy createEpicEnergy() {
 		EpicEnergy epicEnergy = EpicEnergy.epicEnergy();
+		if (repository.findById(epicEnergy.getVatNumber())!= null) {
+			//gestione eccezione
+		}
 		return repository.save(epicEnergy);
 	}
 	

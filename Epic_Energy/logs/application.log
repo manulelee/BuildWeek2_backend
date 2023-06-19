@@ -4411,3 +4411,168 @@ Caused by: org.springframework.data.mapping.PropertyReferenceException: No prope
 18:07:31.294 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
 18:07:31.333 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 18:07:31.342 [restartedMain] INFO  com.epicode.EpicEnergyApplication - Started EpicEnergyApplication in 4.527 seconds (process running for 5.243)
+18:13:18.541 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+18:13:18.553 [Thread-5] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+18:13:18.560 [Thread-5] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+18:13:18.560 [Thread-5] INFO  o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+18:13:18.597 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+18:13:18.606 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+18:13:18.713 [restartedMain] INFO  com.epicode.EpicEnergyApplication - Starting EpicEnergyApplication using Java 17.0.7 with PID 2760 (C:\Users\sarac\eclipse-workspace\BuildWeek2_backend\Epic_Energy\target\classes started by sarac in C:\Users\sarac\eclipse-workspace\BuildWeek2_backend\Epic_Energy)
+18:13:18.713 [restartedMain] INFO  com.epicode.EpicEnergyApplication - No active profile set, falling back to 1 default profile: "default"
+18:13:18.852 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+18:13:18.874 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 21 ms. Found 6 JPA repository interfaces.
+18:13:18.954 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+18:13:18.955 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+18:13:18.955 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+18:13:18.970 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+18:13:18.970 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 255 ms
+18:13:19.004 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+18:13:19.011 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+18:13:19.011 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+18:13:19.011 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+18:13:19.084 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@4805e43b
+18:13:19.084 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+18:13:19.091 [restartedMain] INFO  org.hibernate.orm.dialect - HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@1559e926
+18:13:19.117 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+18:13:19.211 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+18:13:19.213 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:13:19.213 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la relazione "addresses" non esiste, saltata
+18:13:19.213 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:13:19.213 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la relazione "cities" non esiste, saltata
+18:13:19.214 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:13:19.214 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la relazione "clients_address" non esiste, saltata
+18:13:19.215 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:13:19.215 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la relazione "clients_address" non esiste, saltata
+18:13:19.216 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:13:19.216 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la relazione "invoices" non esiste, saltata
+18:13:19.217 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:13:19.217 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "addresses" non esiste, saltata
+18:13:19.218 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:13:19.218 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "cities" non esiste, saltata
+18:13:19.218 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:13:19.218 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "clients" non esiste, saltata
+18:13:19.219 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:13:19.219 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "clients_address" non esiste, saltata
+18:13:19.220 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:13:19.220 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "epic_energy" non esiste, saltata
+18:13:19.221 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:13:19.221 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "invoices" non esiste, saltata
+18:13:19.221 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:13:19.221 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "provinces" non esiste, saltata
+18:13:19.269 [restartedMain] INFO  o.h.t.s.i.e.GenerationTargetToDatabase - HHH000476: Executing script '[injected ScriptSourceInputNonExistentImpl script]'
+18:13:19.269 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+18:13:19.428 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+18:13:19.521 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+18:13:19.532 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+18:13:19.536 [restartedMain] INFO  com.epicode.EpicEnergyApplication - Started EpicEnergyApplication in 0.87 seconds (process running for 353.436)
+18:13:19.538 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+18:14:50.891 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+18:14:50.901 [Thread-7] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+18:14:50.905 [Thread-7] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+18:14:50.906 [Thread-7] INFO  o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+18:14:50.939 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+18:14:50.946 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+18:14:51.030 [restartedMain] INFO  com.epicode.EpicEnergyApplication - Starting EpicEnergyApplication using Java 17.0.7 with PID 2760 (C:\Users\sarac\eclipse-workspace\BuildWeek2_backend\Epic_Energy\target\classes started by sarac in C:\Users\sarac\eclipse-workspace\BuildWeek2_backend\Epic_Energy)
+18:14:51.030 [restartedMain] INFO  com.epicode.EpicEnergyApplication - No active profile set, falling back to 1 default profile: "default"
+18:14:51.161 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+18:14:51.179 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 6 JPA repository interfaces.
+18:14:51.254 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+18:14:51.254 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+18:14:51.255 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+18:14:51.269 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+18:14:51.269 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 238 ms
+18:14:51.302 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+18:14:51.309 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+18:14:51.309 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+18:14:51.310 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+18:14:51.361 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@2e92d077
+18:14:51.361 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+18:14:51.369 [restartedMain] INFO  org.hibernate.orm.dialect - HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@1dcb2783
+18:14:51.389 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+18:14:51.460 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+18:14:51.461 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:51.461 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la relazione "addresses" non esiste, saltata
+18:14:51.461 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:51.461 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la relazione "cities" non esiste, saltata
+18:14:51.462 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:51.462 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la relazione "clients_address" non esiste, saltata
+18:14:51.462 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:51.462 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la relazione "clients_address" non esiste, saltata
+18:14:51.462 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:51.462 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la relazione "invoices" non esiste, saltata
+18:14:51.464 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:51.464 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "addresses" non esiste, saltata
+18:14:51.464 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:51.464 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "cities" non esiste, saltata
+18:14:51.465 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:51.465 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "clients" non esiste, saltata
+18:14:51.465 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:51.465 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "clients_address" non esiste, saltata
+18:14:51.466 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:51.466 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "epic_energy" non esiste, saltata
+18:14:51.466 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:51.466 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "invoices" non esiste, saltata
+18:14:51.467 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:51.467 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "provinces" non esiste, saltata
+18:14:51.512 [restartedMain] INFO  o.h.t.s.i.e.GenerationTargetToDatabase - HHH000476: Executing script '[injected ScriptSourceInputNonExistentImpl script]'
+18:14:51.512 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+18:14:51.657 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+18:14:51.740 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+18:14:51.751 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+18:14:51.755 [restartedMain] INFO  com.epicode.EpicEnergyApplication - Started EpicEnergyApplication in 0.747 seconds (process running for 445.656)
+18:14:51.757 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+18:14:58.309 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+18:14:58.319 [Thread-11] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+18:14:58.332 [Thread-11] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+18:14:58.333 [Thread-11] INFO  o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+18:14:58.372 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown initiated...
+18:14:58.376 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown completed.
+18:14:58.457 [restartedMain] INFO  com.epicode.EpicEnergyApplication - Starting EpicEnergyApplication using Java 17.0.7 with PID 2760 (C:\Users\sarac\eclipse-workspace\BuildWeek2_backend\Epic_Energy\target\classes started by sarac in C:\Users\sarac\eclipse-workspace\BuildWeek2_backend\Epic_Energy)
+18:14:58.458 [restartedMain] INFO  com.epicode.EpicEnergyApplication - No active profile set, falling back to 1 default profile: "default"
+18:14:58.581 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+18:14:58.598 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 16 ms. Found 6 JPA repository interfaces.
+18:14:58.668 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+18:14:58.669 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+18:14:58.669 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+18:14:58.683 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+18:14:58.683 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 224 ms
+18:14:58.716 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+18:14:58.721 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+18:14:58.721 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+18:14:58.722 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Starting...
+18:14:58.774 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Added connection org.postgresql.jdbc.PgConnection@740ca92a
+18:14:58.774 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Start completed.
+18:14:58.781 [restartedMain] INFO  org.hibernate.orm.dialect - HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@4dc20fd7
+18:14:58.802 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+18:14:58.884 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+18:14:58.886 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:58.886 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la relazione "addresses" non esiste, saltata
+18:14:58.887 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:58.887 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la relazione "cities" non esiste, saltata
+18:14:58.888 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:58.888 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la relazione "clients_address" non esiste, saltata
+18:14:58.889 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:58.889 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la relazione "clients_address" non esiste, saltata
+18:14:58.890 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:58.890 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la relazione "invoices" non esiste, saltata
+18:14:58.891 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:58.891 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "addresses" non esiste, saltata
+18:14:58.892 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:58.892 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "cities" non esiste, saltata
+18:14:58.893 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:58.893 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "clients" non esiste, saltata
+18:14:58.895 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:58.895 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "clients_address" non esiste, saltata
+18:14:58.896 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:58.896 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "epic_energy" non esiste, saltata
+18:14:58.896 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:58.896 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "invoices" non esiste, saltata
+18:14:58.897 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+18:14:58.897 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - la tabella "provinces" non esiste, saltata
+18:14:58.939 [restartedMain] INFO  o.h.t.s.i.e.GenerationTargetToDatabase - HHH000476: Executing script '[injected ScriptSourceInputNonExistentImpl script]'
+18:14:58.939 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+18:14:59.101 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+18:14:59.183 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+18:14:59.194 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+18:14:59.197 [restartedMain] INFO  com.epicode.EpicEnergyApplication - Started EpicEnergyApplication in 0.759 seconds (process running for 453.097)
+18:14:59.198 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
