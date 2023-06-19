@@ -1,15 +1,13 @@
 package com.epicode.models;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-import com.epicode.enumerations.AddressType;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -20,7 +18,7 @@ public class EpicEnergy extends Company{
 	
 	@Bean
 	@Scope("singleton")
-	public EpicEnergy epicEnergy() {
+	EpicEnergy epicEnergy() {
 		EpicEnergy e = new EpicEnergy();
 		e.vatNumber= "IT000122345";
 		e.legalName = "Epic Energy";
