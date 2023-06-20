@@ -2,6 +2,8 @@ package com.epicode.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -20,6 +22,7 @@ import lombok.Setter;
 public class City {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name = "city_name", nullable = false)
@@ -29,4 +32,14 @@ public class City {
 	@ManyToOne
 	private Province province;
 	
+	
+	public City(String name, Province province) {
+		this.cityName=name;
+		this.province= province;
+	}
+	
+	@Override
+	public String toString () {
+		return "ID "+ this.id +" - " + this.cityName + " - (" + this.province.getAbbreviation() + ")";
+	}
 }

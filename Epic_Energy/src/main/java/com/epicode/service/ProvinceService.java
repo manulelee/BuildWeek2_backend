@@ -46,4 +46,13 @@ public class ProvinceService {
 		return "Province removed";
 	}
 	
+	public Province getProvinceByName(String name) {
+		Province p = repository.findByProvinceName(name).get();
+		if (p==null) {
+			//gestione eccezione
+			System.out.println("la provincias non esiste");
+		}
+		return p;
+	}
+	
 }
