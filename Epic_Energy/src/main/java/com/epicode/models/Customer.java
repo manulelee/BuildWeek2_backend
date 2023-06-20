@@ -12,6 +12,7 @@ import com.epicode.enumerations.ClientType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -28,8 +29,24 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class Customer extends Company {
+public class Customer {
 
+	@Id
+	@Column(name = "vat_number")
+	protected String vatNumber;
+	
+	@Column(name= "legal_name", nullable = false)
+	protected String legalName;
+	
+	@Column(nullable = false)
+	protected String email;
+	
+	@Column(nullable = false)
+	protected String pec;
+	
+	@Column(nullable = false)
+	protected String phone;	
+	
 	@Column(name="registration", nullable = false)
 	private LocalDate registrationDate;
 	
