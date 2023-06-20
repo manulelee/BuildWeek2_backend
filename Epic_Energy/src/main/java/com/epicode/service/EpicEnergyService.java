@@ -11,10 +11,6 @@ public class EpicEnergyService {
 
 	@Autowired private EpicEnergyRepository repository;
 	
-//	public List<EpicEnergy> getEpicEnergy(){
-//		return repository.findAll();
-//	}
-	
 	public EpicEnergy getEpicEnergy () {
 		if (!repository.existsById("IT000122345")) {
 			//gestione eccezione
@@ -31,6 +27,9 @@ public class EpicEnergyService {
 	}
 	
 	public EpicEnergy updateEpicEnergy (EpicEnergy epicEnergy) {
+		if (!repository.existsById("IT000122345")) {
+			//gestione eccezione
+		}
 		return repository.save(epicEnergy);
 	}
 	
