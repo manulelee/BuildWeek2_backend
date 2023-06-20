@@ -38,7 +38,7 @@ public class InvoiceService {
 		return repository.save(invoice);
 	}
 	
-	public String removeCustomer (Long id) {
+	public String removeInvoice (Long id) {
 		if (!repository.existsById(id)) {
 			//gestione eccezione
 		}
