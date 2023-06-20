@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+
+.Epic_Energy/logs/
