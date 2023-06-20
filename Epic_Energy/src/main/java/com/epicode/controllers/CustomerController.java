@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,9 +35,9 @@ public class CustomerController {
 		return new ResponseEntity<List<Customer>>(service.getAllCustomers(),HttpStatus.OK); 
 			
 	}
-	@GetMapping("/id")
+	@GetMapping("/{id}")
 	@ResponseBody
-	public ResponseEntity<Customer> getCustomerById (String id){
+	public ResponseEntity<Customer> getCustomerById (@PathVariable String id){
 	return new ResponseEntity<Customer>(service.getCustomerById(id),HttpStatus.OK); 
 			
 	}
@@ -47,15 +48,15 @@ public class CustomerController {
 		return service.createCustomer(customer);
 	}
 	
-	@PutMapping("/id")
+	@PutMapping("/{id}")
 	@ResponseBody
-	public Customer updateCustomer(@RequestBody Customer customer) {
-		return service.updateCustomer(customer.getVatNumber(), customer);
+	public Customer updateCustomer(@PathVariable String id, @RequestBody Customer customer) {
+		return service.updateCustomer(id, customer);
 	}
 	
-	@DeleteMapping("/id")
+	@DeleteMapping("/{id}")
 	@ResponseBody
-	public String deleteCustomer(String id) {
+	public String deleteCustomer(@PathVariable String id) {
 		return service.removeCustomer(id);
 	}
 	

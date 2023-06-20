@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,9 +35,9 @@ public class InvoiceController {
 		return new ResponseEntity<List<Invoice>>(service.getAllInvoices(),HttpStatus.OK); 
 			
 	}
-	@GetMapping("/id")
+	@GetMapping("/{id}")
 	@ResponseBody
-	public ResponseEntity<Invoice> getInvoiceById (Long id){
+	public ResponseEntity<Invoice> getInvoiceById (@PathVariable Long id){
 	return new ResponseEntity<Invoice>(service.getInvoiceById(id),HttpStatus.OK); 
 			
 	}
@@ -47,15 +48,15 @@ public class InvoiceController {
 		return service.createInvoice(invoice);
 	}
 	
-	@PutMapping("/id")
+	@PutMapping("/{id}")
 	@ResponseBody
-	public Invoice updateCustomer(@RequestBody Invoice invoice) {
-		return service.updateInvoice(invoice.getInvoiceNumber(), invoice);
+	public Invoice updateCustomer(@PathVariable Long id, @RequestBody Invoice invoice) {
+		return service.updateInvoice(id, invoice);
 	}
 	
-	@DeleteMapping("/id")
+	@DeleteMapping("/{id}")
 	@ResponseBody
-	public String deleteInvoice(Long id) {
+	public String deleteInvoice(@PathVariable Long id) {
 		return service.removeInvoice(id);
 	}
 	

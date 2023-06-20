@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,9 +34,9 @@ public class CityController {
 		return new ResponseEntity<List<City>>(service.getAllCities(),HttpStatus.OK); 
 			
 	}
-	@GetMapping("/id")
+	@GetMapping("/{id}")
 	@ResponseBody
-	public ResponseEntity<City> getCityById (Long id){
+	public ResponseEntity<City> getCityById (@PathVariable Long id){
 	return new ResponseEntity<City>(service.getCityById(id),HttpStatus.OK); 
 			
 	}
@@ -46,15 +47,15 @@ public class CityController {
 		return service.createCity(city);
 	}
 	
-	@PutMapping("/id")
+	@PutMapping("/{id}")
 	@ResponseBody
-	public City updateCity(@RequestBody City city) {
-		return service.updateCity(city.getId(), city);
+	public City updateCity(@PathVariable Long id, @RequestBody City city) {
+		return service.updateCity(id, city);
 	}
 	
-	@DeleteMapping("/id")
+	@DeleteMapping("/{id}")
 	@ResponseBody
-	public String deleteCity(Long id) {
+	public String deleteCity(@PathVariable Long id) {
 		return service.removeCity(id);
 	}
 	

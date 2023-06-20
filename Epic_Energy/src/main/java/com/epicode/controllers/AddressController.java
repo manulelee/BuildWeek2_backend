@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,9 +36,9 @@ public class AddressController {
 		return new ResponseEntity<List<Address>>(service.getAllAddress(),HttpStatus.OK); 
 			
 	}
-	@GetMapping("/id")
+	@GetMapping("/{id}")
 	@ResponseBody
-	public ResponseEntity<Address> getAddressById (Long id){
+	public ResponseEntity<Address> getAddressById (@PathVariable Long id){
 	return new ResponseEntity<Address>(service.getAddressById(id),HttpStatus.OK); 
 			
 	}
@@ -48,15 +49,15 @@ public class AddressController {
 		return service.createAddress(address);
 	}
 	
-	@PutMapping("/id")
+	@PutMapping("/{id}")
 	@ResponseBody
-	public Address updateAddress(@RequestBody Address address) {
-		return service.updateAddress(address.getId(), address);
+	public Address updateAddress(@PathVariable Long id, @RequestBody Address address) {
+		return service.updateAddress(id, address);
 	}
 	
-	@DeleteMapping("/id")
+	@DeleteMapping("/{id}")
 	@ResponseBody
-	public String deleteAddress(Long id) {
+	public String deleteAddress(@PathVariable Long id) {
 		return service.removeAddress(id);
 	}
 	

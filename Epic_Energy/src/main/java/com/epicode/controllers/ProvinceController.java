@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.epicode.models.Province;
 import com.epicode.service.ProvinceService;
+
+import jakarta.websocket.server.PathParam;
 
 
 @RestController
@@ -30,14 +33,14 @@ public class ProvinceController {
 
 	@GetMapping
 	@ResponseBody
-	public ResponseEntity<List<Province>> getAllInvoices (){
+	public ResponseEntity<List<Province>> getAllProvinces (){
 		return new ResponseEntity<List<Province>>(service.getAllProvinces(),HttpStatus.OK); 
 			
 	}
-	@GetMapping("/id")
+	@GetMapping("/{abv}")
 	@ResponseBody
-	public ResponseEntity<Province> getInvoiceById (String id){
-	return new ResponseEntity<Province>(service.getProvinceById(id),HttpStatus.OK); 
+	public ResponseEntity<Province> getprovinceById (@PathVariable String abv){
+	return new ResponseEntity<Province>(service.getProvinceById(abv),HttpStatus.OK); 
 			
 	}
 	
@@ -47,16 +50,16 @@ public class ProvinceController {
 		return service.createProvince(province);
 	}
 	
-	@PutMapping("/id")
+	@PutMapping("/{abv}")
 	@ResponseBody
-	public Province updateProvince(@RequestBody Province province) {
-		return service.updateProvince(province.getProvinceName(), province);
+	public Province updateProvince(@PathVariable String abv, @RequestBody Province province) {
+		return service.updateProvince(abv, province);
 	}
 	
-	@DeleteMapping("/id")
+	@DeleteMapping("/{abv}")
 	@ResponseBody
-	public String deleteProvince(String id) {
-		return service.removeProvince(id);
+	public String deleteProvince(@PathVariable String abv) {
+		return service.removeProvince(abv);
 	}
 	
 }
