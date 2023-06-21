@@ -1,10 +1,14 @@
 package com.epicode.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,12 +35,25 @@ public class CustomerController {
 
 	@Autowired CustomerService service;
 
-	@GetMapping
+	@GetMapping("/all")
 	@ResponseBody
 	public ResponseEntity<List<Customer>> getAllCustomers (){
 		return new ResponseEntity<List<Customer>>(service.getAllCustomers(),HttpStatus.OK); 
 			
 	}
+	
+	@GetMapping
+	@ResponseBody
+	public ResponseEntity<Page<Customer>> getAllCustomersPage (
+	    @RequestParam Optional<Integer> page, 
+	    @RequestParam Optional<Integer> size
+	){
+	    Pageable pageable = PageRequest.of(page.orElse(0), size.orElse(20));  //Imposta dei valori predefiniti
+	    Page<Customer> pageCustomers = service.getAllCustomersPage(pageable);
+	    return ResponseEntity.ok(pageCustomers);
+	}
+	
+	
 	@GetMapping("/{id}")
 	@ResponseBody
 	public ResponseEntity<Customer> getCustomerById (@PathVariable String id){
