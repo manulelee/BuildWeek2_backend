@@ -9,8 +9,11 @@ import java.util.Map;
 import com.epicode.enumerations.AddressType;
 import com.epicode.enumerations.ClientType;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -69,6 +72,7 @@ public class Customer {
 	private String contactPhone;
 	
 	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
 	private ClientType category;
 	
 	@Column(nullable = false)
@@ -76,8 +80,12 @@ public class Customer {
 	
 	private List<Invoice> invoices = new ArrayList<Invoice>();
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Enumerated(EnumType.STRING)
 	protected Map<AddressType, Address> address = new HashMap<AddressType, Address>();
 	
-	
+	@Override
+	public String toString() {
+		return "P.IVA: " + vatNumber + " - " + legalName + " " + email + " " + pec + " "+ phone + " informazioni contatto: " + contactEmail + " " + " " + contactPhone + " - numero fatture: " + invoices.size() + address;  
+	}
 }
