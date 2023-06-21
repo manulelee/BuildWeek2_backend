@@ -86,7 +86,7 @@ public class AuthServiceImpl implements AuthService {
 	        	roles.add(userRole);
 	        });
         } else {
-        	Role userRole = roleRepository.findByRole(UserRole.USER).get();
+        	Role userRole = roleRepository.findByRole(UserRole.ROLE_USER).get();
         	roles.add(userRole);
         }
         
@@ -98,8 +98,8 @@ public class AuthServiceImpl implements AuthService {
     }
     
     public UserRole getRole(String role) {
-    	if(role.equals("ADMIN")) return UserRole.ADMIN;
-    	else return UserRole.USER;
+    	if(role.equals("ADMIN")) return UserRole.ROLE_ADMIN;
+    	else return UserRole.ROLE_USER;
     }
     
 }
