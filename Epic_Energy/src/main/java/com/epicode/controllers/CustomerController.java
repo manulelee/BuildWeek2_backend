@@ -23,7 +23,7 @@ import com.epicode.service.CustomerService;
 
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/api/customers")
 public class CustomerController {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -32,12 +32,14 @@ public class CustomerController {
 
 	@GetMapping
 	@ResponseBody
+	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<List<Customer>> getAllCustomers (){
 		return new ResponseEntity<List<Customer>>(service.getAllCustomers(),HttpStatus.OK); 
 			
 	}
 	@GetMapping("/{id}")
 	@ResponseBody
+	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<Customer> getCustomerById (@PathVariable String id){
 	return new ResponseEntity<Customer>(service.getCustomerById(id),HttpStatus.OK); 
 			

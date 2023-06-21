@@ -76,7 +76,7 @@ public class Customer {
 	private ClientType category;
 
 	@Column(nullable = false)
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = CascadeType.REFRESH)
 	@JsonIgnore
 	private List<Invoice> invoices = new ArrayList<Invoice>();
 
