@@ -50,7 +50,7 @@ public class MyRunner implements ApplicationRunner {
 		if (!provinceService.getAllProvinces().isEmpty()) {
 			return;
 		}
-		//String file = "Epic_Energy/src/main/resources/province-italiane.csv";
+		//String file = "src/main/resources/province-italiane.csv";
 		String file = "src/main/resources/province-italiane.csv";
 		String line;
 		try (
@@ -71,7 +71,7 @@ public class MyRunner implements ApplicationRunner {
 		if (!cityService.getAllCities().isEmpty()) {
 			return;
 		}
-		//String file = "Epic_Energy/src/main/resources/comuni-italiani.csv";
+		//String file = "src/main/resources/comuni-italiani.csv";
 		String file = "src/main/resources/comuni-italiani.csv";
 		String line;
 		try (

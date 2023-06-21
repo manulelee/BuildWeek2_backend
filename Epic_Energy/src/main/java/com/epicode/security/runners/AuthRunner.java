@@ -31,7 +31,6 @@ public class AuthRunner implements ApplicationRunner {
 	AuthService authService;
 
 	private Set<Role> adminRole;
-	private Set<Role> moderatorRole;
 	private Set<Role> userRole;
 
 	@Override
@@ -45,19 +44,11 @@ public class AuthRunner implements ApplicationRunner {
 		Role admin = new Role();
 		admin.setRole(UserRole.ADMIN);
 
-		Role moderator = new Role();
-
-		moderator.setRole(UserRole.MODERATOR);
 		Role user = new Role();
 		user.setRole(UserRole.USER);
 
 		if (!roleRepository.existsByRole(UserRole.ADMIN)) {
 			roleRepository.save(admin);
-		}
-
-		if (!roleRepository.existsByRole(UserRole.MODERATOR)) {
-
-			roleRepository.save(moderator);
 		}
 
 		if (!roleRepository.existsByRole(UserRole.USER)) {
@@ -66,12 +57,7 @@ public class AuthRunner implements ApplicationRunner {
 
 		adminRole = new HashSet<Role>();
 		adminRole.add(admin);
-		adminRole.add(moderator);
 		adminRole.add(user);
-
-		moderatorRole = new HashSet<Role>();
-		moderatorRole.add(moderator);
-		moderatorRole.add(user);
 
 		userRole = new HashSet<Role>();
 		userRole.add(user);
@@ -93,10 +79,10 @@ public class AuthRunner implements ApplicationRunner {
 			User moderator = new User();
 			moderator.setUsername("emma.goldman");
 			moderator.setEmail("emma.goldman@epicode.com");
-			moderator.setPassword(passwordEncoder.encode("moderator"));
+			moderator.setPassword(passwordEncoder.encode("user"));
 			moderator.setFirstname("Emma");
 			moderator.setLastname("Goldman");
-			moderator.setRoles(moderatorRole);
+			moderator.setRoles(userRole);
 			userRepository.save(moderator);
 		}
 
