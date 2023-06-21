@@ -32,7 +32,6 @@ public class Invoice {
 	@Column(name= "invoice_number")
 	private Long invoiceNumber;
 	
-//	private Integer year;
 	@Column(nullable = false)
 	private LocalDate date;
 	

@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,14 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.epicode.models.Invoice;
 import com.epicode.service.InvoiceService;
 
-
 @RestController
-@RequestMapping("/invoices")
+@RequestMapping("/api/invoices")
 public class InvoiceController {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired InvoiceService service;
+	@Autowired
+	InvoiceService service;
 
 	@GetMapping("/all")
 	@ResponseBody
@@ -47,30 +49,33 @@ public class InvoiceController {
 	
 	@GetMapping("/{id}")
 	@ResponseBody
-	public ResponseEntity<Invoice> getInvoiceById (@PathVariable Long id){
-	return new ResponseEntity<Invoice>(service.getInvoiceById(id),HttpStatus.OK); 
-			
+	public ResponseEntity<Invoice> getInvoiceById(@PathVariable Long id) {
+		return new ResponseEntity<Invoice>(service.getInvoiceById(id), HttpStatus.OK);
+
 	}
-	
+
 	@PostMapping
 	@ResponseBody
-	@PreAuthorize("hasRole('ADMIN')")
-	public Invoice createInvoice(@RequestBody Invoice invoice) {
-		return service.createInvoice(invoice);
+	@PreAuthorize("hasRole('USER')")
+	public ResponseEntity<Invoice> createInvoice(@RequestBody Invoice invoice) {
+//		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		System.out.println(authentication.getAuthorities());
+		return new ResponseEntity<Invoice>(service.createInvoice(invoice), HttpStatus.OK);
 	}
-	
+
+
 	@PutMapping("/{id}")
 	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
 	public Invoice updateCustomer(@PathVariable Long id, @RequestBody Invoice invoice) {
 		return service.updateInvoice(id, invoice);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
 	public String deleteInvoice(@PathVariable Long id) {
 		return service.removeInvoice(id);
 	}
-	
+
 }
