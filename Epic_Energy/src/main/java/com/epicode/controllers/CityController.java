@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,18 +44,21 @@ public class CityController {
 	
 	@PostMapping
 	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
 	public City createCity(@RequestBody City city) {
 		return service.createCity(city);
 	}
 	
 	@PutMapping("/{id}")
 	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
 	public City updateCity(@PathVariable Long id, @RequestBody City city) {
 		return service.updateCity(id, city);
 	}
 	
 	@DeleteMapping("/{id}")
 	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
 	public String deleteCity(@PathVariable Long id) {
 		return service.removeCity(id);
 	}

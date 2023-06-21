@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.epicode.models.Province;
 import com.epicode.service.ProvinceService;
-
-import jakarta.websocket.server.PathParam;
 
 
 @RestController
@@ -46,18 +45,21 @@ public class ProvinceController {
 	
 	@PostMapping
 	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
 	public Province createProvince(@RequestBody Province province) {
 		return service.createProvince(province);
 	}
 	
 	@PutMapping("/{abv}")
 	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
 	public Province updateProvince(@PathVariable String abv, @RequestBody Province province) {
 		return service.updateProvince(abv, province);
 	}
 	
 	@DeleteMapping("/{abv}")
 	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
 	public String deleteProvince(@PathVariable String abv) {
 		return service.removeProvince(abv);
 	}

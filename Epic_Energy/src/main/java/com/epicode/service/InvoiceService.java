@@ -25,9 +25,7 @@ public class InvoiceService {
 	}
 	
 	public Invoice createInvoice(Invoice invoice) {
-		if (repository.findById(invoice.getInvoiceNumber())!= null) {
-			//gestione eccezione
-		}
+		System.out.print("invoice saved");
 		return repository.save(invoice);
 	}
 	
