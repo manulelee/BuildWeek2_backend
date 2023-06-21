@@ -16,7 +16,6 @@ import com.epicode.models.Province;
 import com.epicode.service.AddressService;
 import com.epicode.service.CityService;
 import com.epicode.service.ProvinceService;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators.None;
 import com.github.javafaker.Faker;
 
 @Component
@@ -42,7 +41,7 @@ public class MyRunner implements ApplicationRunner {
 		if (!provinceService.getAllProvinces().isEmpty()) {
 			return;
 		}
-		String file = "Epic_Energy/src/main/resources/province-italiane.csv";
+		String file = "src/main/resources/province-italiane.csv";
 		String line;
 		try (
 				BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -62,7 +61,7 @@ public class MyRunner implements ApplicationRunner {
 		if (!cityService.getAllCities().isEmpty()) {
 			return;
 		}
-		String file = "Epic_Energy/src/main/resources/comuni-italiani.csv";
+		String file = "src/main/resources/comuni-italiani.csv";
 		String line;
 		try (
 				BufferedReader br = new BufferedReader(new FileReader(file))) {
