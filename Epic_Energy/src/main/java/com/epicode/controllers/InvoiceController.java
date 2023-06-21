@@ -5,6 +5,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,12 +32,19 @@ public class InvoiceController {
 
 	@Autowired InvoiceService service;
 
-	@GetMapping
+	@GetMapping("/all")
 	@ResponseBody
 	public ResponseEntity<List<Invoice>> getAllInvoices (){
-		return new ResponseEntity<List<Invoice>>(service.getAllInvoices(),HttpStatus.OK); 
-			
+		return new ResponseEntity<List<Invoice>>(service.getAllInvoices(),HttpStatus.OK); 	
 	}
+	
+	@GetMapping
+	@ResponseBody
+	public ResponseEntity<Page<Invoice>> getAllInvoicesPage(Pageable pageable) {
+		Page<Invoice> pageInvoice = service.getAllInvoicesPage(pageable);
+		return ResponseEntity.ok(pageInvoice);
+	}
+	
 	@GetMapping("/{id}")
 	@ResponseBody
 	public ResponseEntity<Invoice> getInvoiceById (@PathVariable Long id){
