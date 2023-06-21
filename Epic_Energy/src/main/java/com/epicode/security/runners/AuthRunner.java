@@ -42,16 +42,16 @@ public class AuthRunner implements ApplicationRunner {
 
 	private void setRoleDefault() {
 		Role admin = new Role();
-		admin.setRole(UserRole.ADMIN);
+		admin.setRole(UserRole.ROLE_ADMIN);
 
 		Role user = new Role();
-		user.setRole(UserRole.USER);
+		user.setRole(UserRole.ROLE_USER);
 
-		if (!roleRepository.existsByRole(UserRole.ADMIN)) {
+		if (!roleRepository.existsByRole(UserRole.ROLE_ADMIN)) {
 			roleRepository.save(admin);
 		}
 
-		if (!roleRepository.existsByRole(UserRole.USER)) {
+		if (!roleRepository.existsByRole(UserRole.ROLE_USER)) {
 			roleRepository.save(user);
 		}
 
@@ -73,17 +73,6 @@ public class AuthRunner implements ApplicationRunner {
 			admin.setLastname("Ragalzi");
 			admin.setRoles(adminRole);
 			userRepository.save(admin);
-		}
-
-		if (userRepository.findByEmail("emma.goldman@epicode.com").isEmpty()) {
-			User moderator = new User();
-			moderator.setUsername("emma.goldman");
-			moderator.setEmail("emma.goldman@epicode.com");
-			moderator.setPassword(passwordEncoder.encode("user"));
-			moderator.setFirstname("Emma");
-			moderator.setLastname("Goldman");
-			moderator.setRoles(userRole);
-			userRepository.save(moderator);
 		}
 
 		if (userRepository.findByEmail("lucy.parsons@epicode.com").isEmpty()) {
