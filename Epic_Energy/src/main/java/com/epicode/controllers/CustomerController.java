@@ -26,60 +26,55 @@ import org.springframework.web.bind.annotation.RestController;
 import com.epicode.models.Customer;
 import com.epicode.service.CustomerService;
 
-
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired CustomerService service;
+	@Autowired
+	CustomerService service;
 
 	@GetMapping("/all")
 	@ResponseBody
-	public ResponseEntity<List<Customer>> getAllCustomers (){
-		return new ResponseEntity<List<Customer>>(service.getAllCustomers(),HttpStatus.OK); 
-			
+	public ResponseEntity<List<Customer>> getAllCustomers() {
+		return new ResponseEntity<List<Customer>>(service.getAllCustomers(), HttpStatus.OK);
+
 	}
-	
+
 	@GetMapping
 	@ResponseBody
-	public ResponseEntity<Page<Customer>> getAllCustomersPage (
-	    @RequestParam Optional<Integer> page, 
-	    @RequestParam Optional<Integer> size
-	){
-	    Pageable pageable = PageRequest.of(page.orElse(0), size.orElse(20));  //Imposta dei valori predefiniti
-	    Page<Customer> pageCustomers = service.getAllCustomersPage(pageable);
-	    return ResponseEntity.ok(pageCustomers);
+	public ResponseEntity<Page<Customer>> getAllCustomersPage(Pageable pageable) {
+		Page<Customer> pageCustomers = service.getAllCustomersPage(pageable);
+		return ResponseEntity.ok(pageCustomers);
 	}
-	
-	
+
 	@GetMapping("/{id}")
 	@ResponseBody
-	public ResponseEntity<Customer> getCustomerById (@PathVariable String id){
-	return new ResponseEntity<Customer>(service.getCustomerById(id),HttpStatus.OK); 
-			
+	public ResponseEntity<Customer> getCustomerById(@PathVariable String id) {
+		return new ResponseEntity<Customer>(service.getCustomerById(id), HttpStatus.OK);
+
 	}
-	
+
 	@PostMapping
 	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
 	public Customer createCustomer(@RequestBody Customer customer) {
 		return service.createCustomer(customer);
 	}
-	
+
 	@PutMapping("/{id}")
 	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
 	public Customer updateCustomer(@PathVariable String id, @RequestBody Customer customer) {
 		return service.updateCustomer(id, customer);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
 	public String deleteCustomer(@PathVariable String id) {
 		return service.removeCustomer(id);
 	}
-	
+
 }
