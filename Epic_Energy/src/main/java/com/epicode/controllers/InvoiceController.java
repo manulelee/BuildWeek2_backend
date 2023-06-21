@@ -21,47 +21,49 @@ import org.springframework.web.bind.annotation.RestController;
 import com.epicode.models.Invoice;
 import com.epicode.service.InvoiceService;
 
-
 @RestController
-@RequestMapping("/invoices")
+@RequestMapping("/api/invoices")
 public class InvoiceController {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired InvoiceService service;
+	@Autowired
+	InvoiceService service;
 
 	@GetMapping
 	@ResponseBody
-	public ResponseEntity<List<Invoice>> getAllInvoices (){
-		return new ResponseEntity<List<Invoice>>(service.getAllInvoices(),HttpStatus.OK); 
-			
+	public ResponseEntity<List<Invoice>> getAllInvoices() {
+		return new ResponseEntity<List<Invoice>>(service.getAllInvoices(), HttpStatus.OK);
+
 	}
+
 	@GetMapping("/{id}")
 	@ResponseBody
-	public ResponseEntity<Invoice> getInvoiceById (@PathVariable Long id){
-	return new ResponseEntity<Invoice>(service.getInvoiceById(id),HttpStatus.OK); 
-			
+	public ResponseEntity<Invoice> getInvoiceById(@PathVariable Long id) {
+		return new ResponseEntity<Invoice>(service.getInvoiceById(id), HttpStatus.OK);
+
 	}
-	
+
 	@PostMapping
 	@ResponseBody
-	@PreAuthorize("hasRole('ADMIN')")
-	public Invoice createInvoice(@RequestBody Invoice invoice) {
-		return service.createInvoice(invoice);
+	@PreAuthorize("hasRole('USER')")
+	public ResponseEntity<Invoice> createInvoice(@RequestBody Invoice invoice) {
+		return new ResponseEntity<Invoice>(service.createInvoice(invoice), HttpStatus.OK);
 	}
-	
+
+
 	@PutMapping("/{id}")
 	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
 	public Invoice updateCustomer(@PathVariable Long id, @RequestBody Invoice invoice) {
 		return service.updateInvoice(id, invoice);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
 	public String deleteInvoice(@PathVariable Long id) {
 		return service.removeInvoice(id);
 	}
-	
+
 }
