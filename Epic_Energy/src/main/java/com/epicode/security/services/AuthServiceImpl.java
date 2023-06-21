@@ -99,7 +99,6 @@ public class AuthServiceImpl implements AuthService {
     
     public UserRole getRole(String role) {
     	if(role.equals("ADMIN")) return UserRole.ADMIN;
-    	else if(role.equals("MODERATOR")) return UserRole.MODERATOR;
     	else return UserRole.USER;
     }
     
