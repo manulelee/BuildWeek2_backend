@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.epicode.enumerations.AddressType;
 import com.epicode.enumerations.ClientType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -76,6 +77,7 @@ public class Customer {
 
 	@Column(nullable = false)
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
+	@JsonIgnore
 	private List<Invoice> invoices = new ArrayList<Invoice>();
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
