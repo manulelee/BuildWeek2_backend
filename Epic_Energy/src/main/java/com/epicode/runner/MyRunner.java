@@ -3,6 +3,7 @@ package com.epicode.runner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -13,15 +14,20 @@ import org.springframework.stereotype.Component;
 
 import com.epicode.enumerations.AddressType;
 import com.epicode.enumerations.ClientType;
+import com.epicode.enumerations.InvoiceState;
 import com.epicode.models.Address;
 import com.epicode.models.City;
 import com.epicode.models.Customer;
+import com.epicode.models.Invoice;
 import com.epicode.models.Province;
 import com.epicode.service.AddressService;
 import com.epicode.service.CityService;
 import com.epicode.service.CustomerService;
+import com.epicode.service.InvoiceService;
 import com.epicode.service.ProvinceService;
 import com.github.javafaker.Faker;
+
+import jakarta.persistence.ManyToOne;
 
 @Component
 public class MyRunner implements ApplicationRunner {
@@ -38,12 +44,17 @@ public class MyRunner implements ApplicationRunner {
 	@Autowired
 	CustomerService customerService;
 
+	@Autowired
+	InvoiceService invoiceService;
+
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		insertProvince();
 		insertMunicipality();
-		//insertAddress();
 		insertCustomer();
+		insertInvoice();
+		
+		customerService.getAllCustomers().forEach(c -> System.out.println(c.getInvoices().size()));
 	}
 
 	public void insertProvince() {
@@ -121,16 +132,19 @@ public class MyRunner implements ApplicationRunner {
 	}
 	
 	public void insertCustomer () {
+		if (!customerService.getAllCustomers().isEmpty()) {
+			return;
+		}
 		Faker faker = new Faker(new Locale("it", "IT"));
 		for (int i = 0; i < 10; i++) {
 			String vat = randomVatNumber();
 			String legalName = faker.company().name(); //da modificare
-			String email = "amministrazione"+ "@" +legalName.split(" ")[0].toLowerCase() + ".com";
-			String pec = legalName.split(" ")[0].toLowerCase() + "@pec.com";
+			String email = "amministrazione"+ "@" +legalName.split(" ")[0].split(",")[0].toLowerCase() + ".com";
+			String pec = legalName.split(" ")[0].split(",")[0].toLowerCase() + "@pec.com";
 			String phone = faker.phoneNumber().phoneNumber();
 			String contactName = faker.name().firstName();
 			String contactLastName = faker.name().lastName();
-			String contactEmail = contactName.toLowerCase() + "." + contactLastName.toLowerCase() + "@" + legalName.split(" ")[0].toLowerCase() + ".com";
+			String contactEmail = contactName.toLowerCase() + "." + contactLastName.toLowerCase() + "@" + legalName.split(" ")[0].split(",")[0].toLowerCase() + ".com";
 			String contactPhone = faker.phoneNumber().cellPhone();
 			
 			Customer customer = new Customer();
@@ -147,11 +161,27 @@ public class MyRunner implements ApplicationRunner {
 			customer.setContactEmail(contactEmail);
 			customer.setCategory(ClientType.SRL);
 			customer.getAddress().put(AddressType.OPERATIVE_SEAT, insertAddress());
+			customer.getAddress().put(AddressType.LEGAL_SEAT, insertAddress());
 			
 			System.out.println(customer);
 			customerService.createCustomer(customer);
 		
 		}
 	}
-
+	
+	public void insertInvoice() {
+		if (!invoiceService.getAllInvoices().isEmpty()) {
+			return;
+		}
+		Faker faker = new Faker(new Locale("it", "IT"));
+		List<Customer> customers = this.customerService.getAllCustomers();
+		for (Customer customer : customers) {
+			Invoice invoice = new Invoice();
+			invoice.setDate(LocalDate.now());
+			invoice.setAmount(faker.number().randomDouble(2, 20, 10000));
+			invoice.setCustomer(customer);
+			invoice.setState(InvoiceState.ACTIVE);
+			invoiceService.createInvoice(invoice);
+		}
+	}
 }

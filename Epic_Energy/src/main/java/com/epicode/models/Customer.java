@@ -31,7 +31,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-
 public class Customer {
 
 	@Id
