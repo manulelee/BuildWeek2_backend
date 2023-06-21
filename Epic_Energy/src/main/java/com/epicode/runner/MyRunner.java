@@ -3,7 +3,6 @@ package com.epicode.runner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalDate;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -26,8 +25,6 @@ import com.epicode.service.CustomerService;
 import com.epicode.service.InvoiceService;
 import com.epicode.service.ProvinceService;
 import com.github.javafaker.Faker;
-
-import jakarta.persistence.ManyToOne;
 
 @Component
 public class MyRunner implements ApplicationRunner {
@@ -53,8 +50,6 @@ public class MyRunner implements ApplicationRunner {
 		insertMunicipality();
 		insertCustomer();
 		insertInvoice();
-		
-		customerService.getAllCustomers().forEach(c -> System.out.println(c.getInvoices().size()));
 	}
 
 	public void insertProvince() {
