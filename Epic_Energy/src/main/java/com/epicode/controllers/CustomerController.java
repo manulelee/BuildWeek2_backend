@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.epicode.models.Customer;
 import com.epicode.repository.CustomerRepository;
 import com.epicode.service.CustomerService;
+import com.epicode.specifications.CustomerSpecifications;
 
 @RestController
 @RequestMapping("/customers")

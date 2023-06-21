@@ -8,7 +8,7 @@ import com.epicode.models.Customer;
 
 public class CustomerSpecifications {
 
-    public static Specification<Customer> containsLegalName(String name) {
+    public static Specification<Customer> legalNameContaining(String name) {
         return (root, query, builder) ->
                 builder.like(builder.lower(root.get("legalName")), "%" + name.toLowerCase() + "%");
     }
