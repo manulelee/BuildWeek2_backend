@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import com.epicode.enumerations.InvoiceState;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -38,7 +39,7 @@ public class Invoice {
 	@Column(nullable = false)
 	private Double amount;
 	
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinColumn(name = "customer_vat_number", referencedColumnName = "vat_number", nullable = false)
 	private Customer customer;
 	

@@ -23,7 +23,7 @@ import com.epicode.service.ProvinceService;
 
 
 @RestController
-@RequestMapping("/provinces")
+@RequestMapping("/api/provinces")
 public class ProvinceController {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
