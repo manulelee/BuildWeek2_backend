@@ -1,15 +1,16 @@
-import { Container } from 'react-bootstrap';
-import './App.css';
-import CustomerList from './components/CustomerList';
+import { Container } from "react-bootstrap";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import MyNavbar from "./components/MyNavbar";
+import CustomerPage from "./components/CustomerPage";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Container></Container>
-        <p>Salve</p>
-        <CustomerList></CustomerList>
-      </header>
+      <Container fluid>
+        <MyNavbar />
+        <CustomerPage />
+      </Container>
     </div>
   );
 }
