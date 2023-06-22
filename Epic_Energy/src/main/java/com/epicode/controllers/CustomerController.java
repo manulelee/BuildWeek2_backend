@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,9 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.epicode.models.Customer;
-import com.epicode.repository.CustomerRepository;
 import com.epicode.service.CustomerService;
-import com.epicode.specifications.CustomerSpecifications;
 
 @RestController
 @RequestMapping("/customers")
@@ -36,13 +33,6 @@ public class CustomerController {
 
 	@Autowired
 	CustomerService service;
-
-	@GetMapping("/all")
-	@ResponseBody
-	public ResponseEntity<List<Customer>> getAllCustomers() {
-		return new ResponseEntity<List<Customer>>(service.getAllCustomers(), HttpStatus.OK);
-
-	}
 
 	@GetMapping
 	@ResponseBody
@@ -78,41 +68,43 @@ public class CustomerController {
 	public String deleteCustomer(@PathVariable String id) {
 		return service.removeCustomer(id);
 	}
-	
-	@GetMapping("/customers")
-	public Page<Customer> getFilteredCustomers(
-	        @RequestParam(required = false) Double minIncome,
-	        @RequestParam(required = false) Double maxIncome,
-	        @RequestParam(required = false) LocalDate registrationStartDate,
-	        @RequestParam(required = false) LocalDate registrationEndDate,
-	        @RequestParam(required = false) LocalDate lastContactStartDate,
-	        @RequestParam(required = false) LocalDate lastContactEndDate,
-	        @RequestParam(required = false) String legalName,
-	        Pageable pageable
-	) {
-	    Specification<Customer> spec = Specification.where(null);
-	    	if (minIncome != null) {
-	    	    if (maxIncome == null) {
-	    	        maxIncome = Double.MAX_VALUE;
-	    	    }
-	    	    spec = spec.and(CustomerSpecifications.annualIncomeBetween(minIncome, maxIncome));
-	    	}
-	    	if (registrationStartDate != null) {
-	    	    if (registrationEndDate == null) {
-	    	        registrationEndDate = LocalDate.now();
-	    	    }
-	    	    spec = spec.and(CustomerSpecifications.registrationDateBetween(registrationStartDate, registrationEndDate));
-	    	}
-	    	if (lastContactStartDate != null) {
-	    	    if (lastContactEndDate == null) {
-	    	        lastContactEndDate = LocalDate.now();
-	    	    }
-	    	    spec = spec.and(CustomerSpecifications.lastContactDateBetween(lastContactStartDate, lastContactEndDate));
-	    	}
-	    if (legalName != null) {
-	        spec = spec.and(CustomerSpecifications.legalNameContaining(legalName));
-	    }
-	    return CustomerRepository.findAll(spec, pageable);
+
+	@GetMapping("/annualIncome?min={minAnnualIncome}&max={maxAnnualIncome}")
+	@ResponseBody
+	public Page<Customer> filterCustomersIncome(@PathVariable Double minAnnualIncome,
+			@PathVariable Double maxAnnualIncome, Pageable pageable) {
+		if (minAnnualIncome == null) {
+			minAnnualIncome = 0.0;
+		}
+		if (maxAnnualIncome == null) {
+			maxAnnualIncome = Double.MAX_VALUE;
+		}
+		return service.getCustomersByAnnualIncomeRange(minAnnualIncome, maxAnnualIncome, pageable);
 	}
+
+//	@GetMapping("/annualIncome?min={minAnnualIncome}&max={maxAnnualIncome}")
+//	@ResponseBody
+//	public Page<Customer> searchCustomers(
+//			@RequestParam(required = false) LocalDate minRegistrationDate,
+//			@RequestParam(required = false) LocalDate maxRegistrationDate,
+//			@RequestParam(required = false) LocalDate minLastContactDate,
+//			@RequestParam(required = false) LocalDate maxLastContactDate, @RequestParam(required = false) String name,
+//			Pageable pageable) {
+//		if (name != null) {
+//			return service.getCustomersByLegalNameContaining(name, pageable);
+//		} else if (minRegistrationDate != null) {
+//			if (maxRegistrationDate == null) {
+//				maxRegistrationDate = LocalDate.now();
+//			}
+//			return service.getCustomersByRegistrationDateRange(minRegistrationDate, maxRegistrationDate, pageable);
+//		} else if (minLastContactDate != null) {
+//			if (maxLastContactDate == null) {
+//				maxLastContactDate = LocalDate.now();
+//			}
+//			return service.getCustomersByLastContactDateRange(minLastContactDate, maxLastContactDate, pageable);
+//		} else {
+//			return service.getAllCustomersPage(pageable);
+//		}
+//	}
 
 }

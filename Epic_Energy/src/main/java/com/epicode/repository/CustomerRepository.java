@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.epicode.models.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, String> {
+	
 	Page<Customer> findByAnnualIncomeBetween(Double minIncome, Double maxIncome, Pageable pageable);
 
 	Page<Customer> findByRegistrationDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable);
@@ -16,4 +17,5 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
 	Page<Customer> findByLastContactDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable);
 
 	Page<Customer> findByLegalNameContaining(String name, Pageable pageable);
+	
 }
