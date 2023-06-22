@@ -69,42 +69,48 @@ public class CustomerController {
 		return service.removeCustomer(id);
 	}
 
-	@GetMapping("/annualIncome?min={minAnnualIncome}&max={maxAnnualIncome}")
+	@GetMapping("/filter")
 	@ResponseBody
-	public Page<Customer> filterCustomersIncome(@PathVariable Double minAnnualIncome,
-			@PathVariable Double maxAnnualIncome, Pageable pageable) {
-		if (minAnnualIncome == null) {
-			minAnnualIncome = 0.0;
+	public Page<Customer> filterCustomersIncome(@RequestParam(required = false) Double minAnnualIncome,
+			@RequestParam(required = false) Double maxAnnualIncome,
+			@RequestParam(required = false) LocalDate minRegistrationDate,
+			@RequestParam(required = false) LocalDate maxRegistrationDate,
+			@RequestParam(required = false) LocalDate minLastContactDate,
+			@RequestParam(required = false) LocalDate maxLastContactDate, @RequestParam(required = false) String name,
+			Pageable pageable) {
+		if(minAnnualIncome == null & maxAnnualIncome == null & minRegistrationDate == null & maxRegistrationDate == null & minLastContactDate == null & maxLastContactDate == null) {
+			return service.getAllCustomersPage(pageable);
+		} else {
+		if (name != null) {
+			return service.getCustomersByLegalNameContaining(name, pageable);
 		}
-		if (maxAnnualIncome == null) {
-			maxAnnualIncome = Double.MAX_VALUE;
+		if (minAnnualIncome != null || maxAnnualIncome != null) {
+			if (minAnnualIncome == null) {
+				minAnnualIncome = 0.0;
+			}
+			if (maxAnnualIncome == null) {
+				maxAnnualIncome = Double.MAX_VALUE;
+			}
+			return service.getCustomersByAnnualIncomeRange(minAnnualIncome, maxAnnualIncome, pageable);
+		} 
+		if (minRegistrationDate != null || maxAnnualIncome != null) {
+			if (maxRegistrationDate == null) {
+				maxRegistrationDate = LocalDate.now();
+			}
+			if (minRegistrationDate == null) {
+				minRegistrationDate = LocalDate.MIN;
+			}
+			return service.getCustomersByRegistrationDateRange(minRegistrationDate, maxRegistrationDate, pageable);
 		}
-		return service.getCustomersByAnnualIncomeRange(minAnnualIncome, maxAnnualIncome, pageable);
+		if (minLastContactDate != null) {
+			if (maxLastContactDate == null) {
+				maxLastContactDate = LocalDate.now();
+			}
+			return service.getCustomersByLastContactDateRange(minLastContactDate, maxLastContactDate, pageable);
+		}
+		
 	}
+		return service.getAllCustomersPage(pageable);
 
-//	@GetMapping("/annualIncome?min={minAnnualIncome}&max={maxAnnualIncome}")
-//	@ResponseBody
-//	public Page<Customer> searchCustomers(
-//			@RequestParam(required = false) LocalDate minRegistrationDate,
-//			@RequestParam(required = false) LocalDate maxRegistrationDate,
-//			@RequestParam(required = false) LocalDate minLastContactDate,
-//			@RequestParam(required = false) LocalDate maxLastContactDate, @RequestParam(required = false) String name,
-//			Pageable pageable) {
-//		if (name != null) {
-//			return service.getCustomersByLegalNameContaining(name, pageable);
-//		} else if (minRegistrationDate != null) {
-//			if (maxRegistrationDate == null) {
-//				maxRegistrationDate = LocalDate.now();
-//			}
-//			return service.getCustomersByRegistrationDateRange(minRegistrationDate, maxRegistrationDate, pageable);
-//		} else if (minLastContactDate != null) {
-//			if (maxLastContactDate == null) {
-//				maxLastContactDate = LocalDate.now();
-//			}
-//			return service.getCustomersByLastContactDateRange(minLastContactDate, maxLastContactDate, pageable);
-//		} else {
-//			return service.getAllCustomersPage(pageable);
-//		}
-//	}
-
+	}
 }

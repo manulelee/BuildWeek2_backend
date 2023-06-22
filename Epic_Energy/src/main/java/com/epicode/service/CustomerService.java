@@ -58,19 +58,19 @@ public class CustomerService {
 	//Queries
 	
 	public Page<Customer> getCustomersByAnnualIncomeRange(Double minIncome, Double maxIncome, Pageable pageable) {
-        return repository.findByAnnualIncomeBetween(minIncome, maxIncome, pageable);
+        return repoPage.findByAnnualIncomeBetween(minIncome, maxIncome, pageable);
     }
 
     public Page<Customer> getCustomersByRegistrationDateRange(LocalDate startDate, LocalDate endDate, Pageable pageable) {
-        return repository.findByRegistrationDateBetween(startDate, endDate, pageable);
+        return repoPage.findByRegistrationDateBetween(startDate, endDate, pageable);
     }
 
     public Page<Customer> getCustomersByLastContactDateRange(LocalDate startDate, LocalDate endDate, Pageable pageable) {
-        return repository.findByLastContactDateBetween(startDate, endDate, pageable);
+        return repoPage.findByLastContactDateBetween(startDate, endDate, pageable);
     }
 
     public Page<Customer> getCustomersByLegalNameContaining(String name, Pageable pageable) {
-        return repository.findByLegalNameContaining(name, pageable);
+        return repoPage.findByLegalNameContaining(name, pageable);
     }
 	
 }
