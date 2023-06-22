@@ -35,12 +35,14 @@ public class InvoiceController {
 	InvoiceService service;
 	@GetMapping("/all")
 	@ResponseBody
+	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<List<Invoice>> getAllInvoices (){
 		return new ResponseEntity<List<Invoice>>(service.getAllInvoices(),HttpStatus.OK); 	
 	}
 	
 	@GetMapping
 	@ResponseBody
+	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<Page<Invoice>> getAllInvoicesPage(Pageable pageable) {
 		Page<Invoice> pageInvoice = service.getAllInvoicesPage(pageable);
 		return ResponseEntity.ok(pageInvoice);
@@ -80,13 +82,11 @@ public class InvoiceController {
 	}
 
 	@DeleteMapping("/{id}")
-	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<String> deleteInvoice(@PathVariable Long id) {
 		try {
-			service.removeInvoice(id);
 			return new ResponseEntity<String>(
-					"Invoice deleted successfully", HttpStatus.OK);
+					service.removeInvoice(id), HttpStatus.OK);
 		} catch (InvoiceNotFoundException e) {
 			return new ResponseEntity<String>(
 					"Invoice not found", HttpStatus.NOT_FOUND);
@@ -98,7 +98,7 @@ public class InvoiceController {
 	public ResponseEntity<String> handleException(Exception e) {
 		logger.error("An error occurred: {}", e.getMessage());
 		return new ResponseEntity<String>(
-				"An error occurred :()", HttpStatus.INTERNAL_SERVER_ERROR);
+				e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 }

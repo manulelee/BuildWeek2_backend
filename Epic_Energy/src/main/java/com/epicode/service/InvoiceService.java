@@ -15,10 +15,17 @@ import com.epicode.repository.InvoicesPageRepository;
 @Service
 public class InvoiceService {
 
-	@Autowired private InvoiceRepository repository;
-	
-	public List<Invoice> getAllInvoices(){
+	@Autowired
+	private InvoiceRepository repository;
+
+	@Autowired private InvoicesPageRepository repoPage;
+
+	public List<Invoice> getAllInvoices() {
 		return repository.findAll();
+	}
+
+	public Page<Invoice> getAllInvoicesPage(Pageable pageable) {
+		return repoPage.findAll(pageable);
 	}
 
 	public Invoice getInvoiceById(Long id) {

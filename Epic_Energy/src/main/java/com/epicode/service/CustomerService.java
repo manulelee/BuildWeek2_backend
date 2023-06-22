@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.epicode.exceptions.CustomerNotFoundException;
 import com.epicode.models.Customer;
 import com.epicode.repository.CustomerPageRepository;
 import com.epicode.repository.CustomerRepository;
@@ -27,7 +28,7 @@ public class CustomerService {
 	
 	public Customer getCustomerById (String vatNumber) {
 		if (!repository.existsById(vatNumber)) {
-			//gestione eccezione
+			throw new CustomerNotFoundException(vatNumber);
 		}
 		return repository.findById(vatNumber).get();
 	}
@@ -41,17 +42,17 @@ public class CustomerService {
 	
 	public Customer updateCustomer (String vatNumber, Customer customer) {
 		if (!repository.existsById(vatNumber)) {
-			//gestione eccezione
+			throw new CustomerNotFoundException(vatNumber);
 		}
 		return repository.save(customer);
 	}
 	
 	public String removeCustomer (String vatNumber) {
 		if (!repository.existsById(vatNumber)) {
-			//gestione eccezione
+			throw new CustomerNotFoundException("Invoice not found");
 		}
 		repository.deleteById(vatNumber);
-		return "Address removed";
+		return "Customer removed";
 	}
 	
 }
