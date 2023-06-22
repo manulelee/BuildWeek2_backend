@@ -72,5 +72,7 @@ public class CustomerService {
     public Page<Customer> getCustomersByLegalNameContaining(String name, Pageable pageable) {
         return repoPage.findByLegalNameContaining(name, pageable);
     }
+
+
 	
 }
