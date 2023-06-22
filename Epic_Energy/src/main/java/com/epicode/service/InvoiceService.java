@@ -1,5 +1,6 @@
 package com.epicode.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,49 +8,81 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.epicode.enumerations.InvoiceState;
+import com.epicode.exceptions.InvoiceNotFoundException;
+import com.epicode.models.Customer;
 import com.epicode.models.Invoice;
 import com.epicode.repository.InvoiceRepository;
-import com.epicode.repository.InvoicesPageRepository;
+import com.epicode.repository.InvoicePageRepository;
 
 @Service
 public class InvoiceService {
 
-	@Autowired private InvoiceRepository repository;
-	@Autowired private InvoicesPageRepository repoPage;
-	
-	public Page<Invoice> getAllInvoicesPage(Pageable pageable){
-        return repoPage.findAll(pageable);
-    }
-	
-	public List<Invoice> getAllInvoices(){
+	@Autowired
+	private InvoiceRepository repository;
+
+	@Autowired
+	private InvoicePageRepository repoPage;
+
+	public List<Invoice> getAllInvoices() {
 		return repository.findAll();
 	}
-	
-	public Invoice getInvoiceById (Long id) {
-		if (!repository.existsById(id)) {
-			//gestione eccezione
-		}
-		return repository.findById(id).get();
+
+	public Page<Invoice> getAllInvoicesPage(Pageable pageable) {
+		return repoPage.findAll(pageable);
 	}
-	
+
+	public Invoice getInvoiceById(Long id) {
+		return repository.findById(id)
+				.orElseThrow(() -> new InvoiceNotFoundException("Invoice not found"));
+	}
+
 	public Invoice createInvoice(Invoice invoice) {
 		System.out.print("invoice saved");
 		return repository.save(invoice);
 	}
-	
-	public Invoice updateInvoice (Long id, Invoice invoice) {
-		if (!repository.existsById(id)) {
-			//gestione eccezione
-		}
-		return repository.save(invoice);
+
+	public Invoice updateInvoice(Long id, Invoice invoice) {
+		return repository.findById(id)
+				.map(existingInvoice -> {
+					existingInvoice.setCustomer(invoice.getCustomer());
+					existingInvoice.setDate(invoice.getDate());
+					existingInvoice.setAmount(invoice.getAmount());
+					return repository.save(existingInvoice);
+				})
+				.orElseThrow(() -> new InvoiceNotFoundException("Invoice not found"));
 	}
-	
-	public String removeInvoice (Long id) {
+
+	public String removeInvoice(Long id) {
 		if (!repository.existsById(id)) {
-			//gestione eccezione
+			throw new InvoiceNotFoundException("Invoice not found");
 		}
 		repository.deleteById(id);
 		return "Invoice removed";
 	}
-	
+
+	public Page<Invoice> getInvoicesByCustomer(Customer customer, Pageable pageable) {
+		return repoPage.findByCustomer(customer, pageable);
+	}
+
+	public Page<Invoice> getInvoicesByState(InvoiceState state, Pageable pageable) {
+		return repoPage.findByState(state, pageable);
+	}
+
+	public Page<Invoice> getInvoicesByDate(LocalDate date, Pageable pageable) {
+		return repoPage.findByDate(date, pageable);
+	}
+
+	public Page<Invoice> getInvoicesByDateRange(LocalDate startDate, LocalDate endDate, Pageable pageable) {
+		return repoPage.findByDateBetween(startDate, endDate, pageable);
+	}
+
+	public Page<Invoice> getInvoicesByYear(int year, Pageable pageable) {
+		return repoPage.findByYear(year, pageable);
+	}
+
+	public Page<Invoice> getInvoicesByAmountRange(Double minAmount, Double maxAmount, Pageable pageable) {
+		return repoPage.findByAmountBetween(minAmount, maxAmount, pageable);
+	}
+
 }

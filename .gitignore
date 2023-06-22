@@ -1,5 +1,8 @@
 /.metadata/
 *.log*
+*.log
+Epic_Energy/logs/application.log
+
 
 # dependencies
 /node_modules

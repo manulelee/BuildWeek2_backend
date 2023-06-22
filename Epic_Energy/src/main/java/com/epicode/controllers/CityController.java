@@ -22,7 +22,7 @@ import com.epicode.models.City;
 import com.epicode.service.CityService;
 
 @RestController
-@RequestMapping("/cities")
+@RequestMapping("/api/cities")
 public class CityController {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
