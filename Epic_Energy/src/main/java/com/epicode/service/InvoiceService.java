@@ -1,5 +1,6 @@
 package com.epicode.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.epicode.enumerations.InvoiceState;
 import com.epicode.exceptions.InvoiceNotFoundException;
+import com.epicode.models.Customer;
 import com.epicode.models.Invoice;
 import com.epicode.repository.InvoiceRepository;
 import com.epicode.repository.InvoicesPageRepository;
@@ -18,7 +21,8 @@ public class InvoiceService {
 	@Autowired
 	private InvoiceRepository repository;
 
-	@Autowired private InvoicesPageRepository repoPage;
+	@Autowired
+	private InvoicesPageRepository repoPage;
 
 	public List<Invoice> getAllInvoices() {
 		return repository.findAll();
@@ -55,6 +59,30 @@ public class InvoiceService {
 		}
 		repository.deleteById(id);
 		return "Invoice removed";
+	}
+
+	public Page<Invoice> getInvoicesByCustomer(Customer customer, Pageable pageable) {
+		return repoPage.findByCustomer(customer, pageable);
+	}
+
+	public Page<Invoice> getInvoicesByState(InvoiceState state, Pageable pageable) {
+		return repoPage.findByState(state, pageable);
+	}
+
+	public Page<Invoice> getInvoicesByDate(LocalDate date, Pageable pageable) {
+		return repoPage.findByDate(date, pageable);
+	}
+
+	public Page<Invoice> getInvoicesByDateRange(LocalDate startDate, LocalDate endDate, Pageable pageable) {
+		return repoPage.findByDateBetween(startDate, endDate, pageable);
+	}
+
+	public Page<Invoice> getInvoicesByYear(int year, Pageable pageable) {
+		return repoPage.findByYear(year, pageable);
+	}
+
+	public Page<Invoice> getInvoicesByAmountRange(Double minAmount, Double maxAmount, Pageable pageable) {
+		return repoPage.findByAmountBetween(minAmount, maxAmount, pageable);
 	}
 
 }
