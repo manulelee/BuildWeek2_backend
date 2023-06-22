@@ -13,7 +13,7 @@ import com.epicode.exceptions.InvoiceNotFoundException;
 import com.epicode.models.Customer;
 import com.epicode.models.Invoice;
 import com.epicode.repository.InvoiceRepository;
-import com.epicode.repository.InvoicesPageRepository;
+import com.epicode.repository.InvoicePageRepository;
 
 @Service
 public class InvoiceService {
@@ -22,7 +22,7 @@ public class InvoiceService {
 	private InvoiceRepository repository;
 
 	@Autowired
-	private InvoicesPageRepository repoPage;
+	private InvoicePageRepository repoPage;
 
 	public List<Invoice> getAllInvoices() {
 		return repository.findAll();
