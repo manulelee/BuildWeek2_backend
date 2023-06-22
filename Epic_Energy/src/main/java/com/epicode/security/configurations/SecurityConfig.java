@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.epicode.security.security.JwtAuthenticationEntryPoint;
 import com.epicode.security.security.JwtAuthenticationFilter;
@@ -41,6 +42,7 @@ public class SecurityConfig {
         return configuration.getAuthenticationManager();
     }
 
+    @CrossOrigin
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
