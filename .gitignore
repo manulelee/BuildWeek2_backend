@@ -1,2 +1,5 @@
 /.metadata/
 *.log*
+*.log
+Epic_Energy/logs/application.log
+
