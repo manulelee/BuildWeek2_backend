@@ -69,6 +69,19 @@ public class CustomerController {
 		return service.removeCustomer(id);
 	}
 
+	/**
+	 * Retrieves a page of customers that match the provided filter criteria.
+	 *
+	 * @param  minAnnualIncome        (optional) minimum annual income of customers to retrieve
+	 * @param  maxAnnualIncome        (optional) maximum annual income of customers to retrieve
+	 * @param  minRegistrationDate    (optional) minimum registration date of customers to retrieve
+	 * @param  maxRegistrationDate    (optional) maximum registration date of customers to retrieve
+	 * @param  minLastContactDate     (optional) minimum last contact date of customers to retrieve
+	 * @param  maxLastContactDate     (optional) maximum last contact date of customers to retrieve
+	 * @param  name                   (optional) legal name of customers to retrieve
+	 * @param  pageable               page request params
+	 * @return                        page of customers that match the provided filter criteria
+	 */
 	@GetMapping("/filter")
 	@ResponseBody
 	public Page<Customer> filterCustomersIncome(@RequestParam(required = false) Double minAnnualIncome,
@@ -78,38 +91,39 @@ public class CustomerController {
 			@RequestParam(required = false) LocalDate minLastContactDate,
 			@RequestParam(required = false) LocalDate maxLastContactDate, @RequestParam(required = false) String name,
 			Pageable pageable) {
-		if(minAnnualIncome == null & maxAnnualIncome == null & minRegistrationDate == null & maxRegistrationDate == null & minLastContactDate == null & maxLastContactDate == null) {
+		if (minAnnualIncome == null & maxAnnualIncome == null & minRegistrationDate == null
+				& maxRegistrationDate == null & minLastContactDate == null & maxLastContactDate == null) {
 			return service.getAllCustomersPage(pageable);
 		} else {
-		if (name != null) {
-			return service.getCustomersByLegalNameContaining(name, pageable);
+			if (name != null) {
+				return service.getCustomersByLegalNameContaining(name, pageable);
+			}
+			if (minAnnualIncome != null || maxAnnualIncome != null) {
+				if (minAnnualIncome == null) {
+					minAnnualIncome = 0.0;
+				}
+				if (maxAnnualIncome == null) {
+					maxAnnualIncome = Double.MAX_VALUE;
+				}
+				return service.getCustomersByAnnualIncomeRange(minAnnualIncome, maxAnnualIncome, pageable);
+			}
+			if (minRegistrationDate != null || maxAnnualIncome != null) {
+				if (maxRegistrationDate == null) {
+					maxRegistrationDate = LocalDate.now();
+				}
+				if (minRegistrationDate == null) {
+					minRegistrationDate = LocalDate.MIN;
+				}
+				return service.getCustomersByRegistrationDateRange(minRegistrationDate, maxRegistrationDate, pageable);
+			}
+			if (minLastContactDate != null) {
+				if (maxLastContactDate == null) {
+					maxLastContactDate = LocalDate.now();
+				}
+				return service.getCustomersByLastContactDateRange(minLastContactDate, maxLastContactDate, pageable);
+			}
+
 		}
-		if (minAnnualIncome != null || maxAnnualIncome != null) {
-			if (minAnnualIncome == null) {
-				minAnnualIncome = 0.0;
-			}
-			if (maxAnnualIncome == null) {
-				maxAnnualIncome = Double.MAX_VALUE;
-			}
-			return service.getCustomersByAnnualIncomeRange(minAnnualIncome, maxAnnualIncome, pageable);
-		} 
-		if (minRegistrationDate != null || maxAnnualIncome != null) {
-			if (maxRegistrationDate == null) {
-				maxRegistrationDate = LocalDate.now();
-			}
-			if (minRegistrationDate == null) {
-				minRegistrationDate = LocalDate.MIN;
-			}
-			return service.getCustomersByRegistrationDateRange(minRegistrationDate, maxRegistrationDate, pageable);
-		}
-		if (minLastContactDate != null) {
-			if (maxLastContactDate == null) {
-				maxLastContactDate = LocalDate.now();
-			}
-			return service.getCustomersByLastContactDateRange(minLastContactDate, maxLastContactDate, pageable);
-		}
-		
-	}
 		return service.getAllCustomersPage(pageable);
 
 	}
