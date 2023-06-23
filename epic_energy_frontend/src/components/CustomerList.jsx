@@ -14,8 +14,7 @@ import { Form } from "react-bootstrap";
 import CustomerLine from "./CustomerLine";
 
 function CustomerList() {
-  const key =
-    "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJjLnNhcmFAZ21haWwuY29tIiwiaWF0IjoxNjg3NTE5NjIyLCJleHAiOjE2ODgzODM2MjJ9.EnUASCMKoc8M1RF_nuLBeYkLKOksFHIVh5rHUT1ziWRw5tRFQcz_JuP7ufF5shGT";
+  let token = localStorage.getItem("token") || "";
   const [customers, setCustomers] = useState([]);
 
   const [showFiltra, setShowFiltra] = useState(false);
@@ -56,7 +55,7 @@ function CustomerList() {
       const response = await fetch(url, {
         method: "GET",
         headers: {
-          Authorization: "Bearer " + key,
+          Authorization: "Bearer " + token,
           "Content-Type": "application/json",
         },
       });
@@ -106,7 +105,7 @@ function CustomerList() {
       const response = await fetch(url, {
         method: "GET",
         headers: {
-          Authorization: "Bearer " + key,
+          Authorization: "Bearer " + token,
           "Content-Type": "application/json",
         },
       });

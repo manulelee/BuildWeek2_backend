@@ -10,8 +10,8 @@ function LoginPage() {
 
   let token;
 
-  const [pass, setPassword] = useState([]);
-  const [user, setUsername] = useState([]);
+  const [pass, setPassword] = useState("");
+  const [user, setUsername] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
     getToken(loginDto);
@@ -40,7 +40,7 @@ function LoginPage() {
         let data = await response.json();
         console.log(data);
         token = data.accessToken;
-        localStorage.setItem("token", "Bearer " + token);
+        localStorage.setItem("token", token);
         window.location.replace("/customers");
       }
     } catch (error) {

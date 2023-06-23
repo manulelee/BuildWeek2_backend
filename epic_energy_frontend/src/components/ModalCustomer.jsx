@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Dropdown } from "react-bootstrap";
 
-function ModalCustomer() {
+function ModalCustomer({ customer }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -26,24 +26,37 @@ function ModalCustomer() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        New Customer
-      </Button>
+      {
+        !customer.legalName && (
+          <Button variant="primary" onClick={handleShow}>
+            New Customer
+          </Button>
+        )
+      }
+      {
+        customer.legalName && (
+          <Button variant="primary" onClick={handleShow}>
+            Edit Customer
+          </Button>
+        )
+      }
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Title>Customer Sign in</Modal.Title>
         <Modal.Body>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row className="m-5">
-              <Form.Group as={Col} md="4" controlId="validationCustom01">
-                <Form.Label>Name</Form.Label>
-                <Form.Control required type="text" placeholder="First name" />
+              <Form.Group as={Col} md="4" controlId="vatNumber">
+                <Form.Label>VAT Number</Form.Label>
+                <Form.Control required type="text" placeholder="VAT Number"
+                  value={customer.vatNumber} />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom02">
-                <Form.Label>Legal Name</Form.Label>
-                <Form.Control required type="text" placeholder="Last name" />
+              <Form.Group as={Col} md="4" controlId="legalName">
+                <Form.Label>Legalname</Form.Label>
+                <Form.Control required type="text" placeholder="Legalname"
+                  value={customer.legalName} />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+              <Form.Group as={Col} md="4" controlId="email">
                 <Form.Label>Email</Form.Label>
                 <InputGroup hasValidation>
                   <Form.Control
@@ -51,10 +64,11 @@ function ModalCustomer() {
                     placeholder="name.lastname@gmail.com"
                     aria-describedby="inputGroupPrepend"
                     required
+                    value={customer.email}
                   />
                 </InputGroup>
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+              <Form.Group as={Col} md="4" controlId="pec">
                 <Form.Label>Pec</Form.Label>
                 <InputGroup hasValidation>
                   <Form.Control
@@ -62,46 +76,63 @@ function ModalCustomer() {
                     placeholder="name.lastname@pec.com"
                     aria-describedby="inputGroupPrepend"
                     required
+                    value={customer.pec}
                   />
                 </InputGroup>
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom02">
+              <Form.Group as={Col} md="4" controlId="phone">
                 <Form.Label>Phone</Form.Label>
                 <Form.Control
                   required
-                  type="number"
                   placeholder="+39 3366998844"
+                  value={customer.phone}
                 />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom02">
-                <Form.Label>Date Registration</Form.Label>
-                <Form.Control required type="date" placeholder="dd/mm/yyyy" />
+              <Form.Group as={Col} md="4" controlId="registrationDate">
+                <Form.Label>Registration Date</Form.Label>
+                <Form.Control required type="date" placeholder="dd/mm/yyyy"
+                  value={customer.registrationDate}
+                />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom02">
+              <Form.Group as={Col} md="4" controlId="lastContactDate">
                 <Form.Label>Last Contact Date</Form.Label>
-                <Form.Control required type="date" placeholder="dd/mm/yyyy" />
+                <Form.Control required type="date" placeholder="dd/mm/yyyy"
+                  value={customer.lastContactDate} />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom02">
+              <Form.Group as={Col} md="4" controlId="annualIncome">
                 <Form.Label>Annual Income €</Form.Label>
-                <Form.Control required type="number" placeholder="0000" />
+                <Form.Control required type="number" placeholder="0000"
+                  value={customer.annualIncome} />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom02">
+              <Form.Group as={Col} md="4" controlId="contactEmail">
                 <Form.Label>Contact Email</Form.Label>
-                <Form.Control required type="Email" placeholder="" />
+                <Form.Control
+                  type="email"
+                  placeholder="name.lastname@gmail.com"
+                  aria-describedby="inputGroupPrepend"
+                  required
+                  value={customer.contactEmail}
+                />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom02">
+              <Form.Group as={Col} md="4" controlId="contactName">
                 <Form.Label> Contact Name</Form.Label>
-                <Form.Control required type="text" placeholder="" />
+                <Form.Control required type="text" placeholder="Firstname"
+                  value={customer.contactName} />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom02">
+              <Form.Group as={Col} md="4" controlId="contactLastName">
                 <Form.Label> Contact Last Name</Form.Label>
-                <Form.Control required type="text" placeholder="" />
+                <Form.Control required type="text" placeholder="Lastname"
+                  value={customer.contactLastName} />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom02">
+              <Form.Group as={Col} md="4" controlId="contactPhone">
                 <Form.Label>Contact Phone</Form.Label>
-                <Form.Control required type="number" placeholder="" />
+                <Form.Control
+                  required
+                  placeholder="+39 3366998844"
+                  value={customer.contactPhone}
+                />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom02">
+              <Form.Group as={Col} md="4" controlId="category">
                 <Form.Label> Address</Form.Label>
                 <Form.Control required type="text" placeholder="Sede Legale" />
               </Form.Group>
@@ -137,6 +168,7 @@ function ModalCustomer() {
           <Button variant="primary" type="submit">
             Save Changes
           </Button>
+          <Button>Delete Customer</Button>
         </Modal.Footer>
       </Modal>
     </>
