@@ -41,6 +41,7 @@ function LoginPage() {
         console.log(data);
         token = data.accessToken;
         localStorage.setItem("token", "Bearer" + " " + token);
+        window.location.replace("/customers");
       }
     } catch (error) {
       console.log(error);
@@ -65,7 +66,6 @@ function LoginPage() {
           onClick={() => {
             getToken(loginDto);
             //   window.location.replace("/");
-            <Link to="/"></Link>;
           }}
         >
           Login
