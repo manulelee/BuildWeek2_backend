@@ -49,9 +49,9 @@ function LoginPage() {
   };
 
   return (
-    <div className="modal show my-5" style={{ display: "block", height: "100vh", vhposition: "initial" }}>
+    <div className="py-5 bg-dark" style={{ display: "block", height: "100vh", vhposition: "initial" }}>
       <img src="https://epicode.com/wp-content/uploads/2022/06/EPICODE-2.0-LOGO-15.png" style={{ width: "30%" }}></img>
-      <p>Welcome on Epic Energy ⚡️</p>
+      <p className="text-light">Welcome on Epic Energy ⚡️</p>
 
       <Form onSubmit={handleSubmit} className="mt-5">
         <Form.Group className="mb-3 w-25 mx-auto" controlId="username" onChange={handleUsername}>
