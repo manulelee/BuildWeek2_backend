@@ -1,8 +1,9 @@
-import { Container } from 'react-bootstrap';
-import './App.css';
-import CustomerList from './components/CustomerList';
-import ModalCustomer from './components/ModalCustomer';
-import ModalInvoice from './components/ModalInvoice';
+import { Container } from "react-bootstrap";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import CustomerList from "./components/CustomerList";
+import ModalCustomer from "./components/ModalCustomer";
+import ModalInvoice from "./components/ModalInvoice";
 
 function App() {
   return (
