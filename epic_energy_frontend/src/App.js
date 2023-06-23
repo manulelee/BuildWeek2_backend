@@ -1,20 +1,24 @@
 import { Container } from "react-bootstrap";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import CustomerList from "./components/CustomerList";
-import ModalCustomer from "./components/ModalCustomer";
-import ModalInvoice from "./components/ModalInvoice";
+import MyNavbar from "./components/MyNavbar";
+import CustomerPage from "./components/CustomerPage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Container></Container>
-        <p>Salve</p>
-        <CustomerList></CustomerList>
-        <ModalCustomer></ModalCustomer>
-        <ModalInvoice></ModalInvoice>
-      </header>
+      <Container fluid>
+        <MyNavbar />
+        <BrowserRouter>
+          <Routes>
+            {/*
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />*/}
+            <Route path="/" element={<CustomerPage />} />
+          </Routes>
+        </BrowserRouter>
+      </Container>
     </div>
   );
 }
