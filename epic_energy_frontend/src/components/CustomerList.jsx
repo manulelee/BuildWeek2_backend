@@ -88,7 +88,7 @@ function CustomerList() {
       queryParams.push(`maxLastContactDate=${filters.maxLastContactDate}`);
     }
     if (filters.name) {
-      queryParams.push(`legalName=${filters.legalName}`);
+      queryParams.push(`legalName=${filters.name}`);
     }
 
     if (queryParams.length > 0) {
