@@ -24,7 +24,7 @@ import com.epicode.service.AddressService;
 
 
 @RestController
-@RequestMapping("/addresses")
+@RequestMapping("/api/addresses")
 public class AddressController {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
