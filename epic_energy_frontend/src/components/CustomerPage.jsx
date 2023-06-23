@@ -46,10 +46,6 @@ function CustomerPage({ onSearch }) {
     <Container className="my-4 mx-2">
       <h1 className="mb-5">Registro Clienti</h1>
       <Row className="mx-1">
-        <Col>
-          <ModalCustomer />
-          <ModalInvoice />
-        </Col>
         <Col className="d-flex ">
           <DropdownButton id="dropdown-OrdinaPer" title="Ordina per">
             <Dropdown.Item href="#/action-1">Nome</Dropdown.Item>
@@ -120,6 +116,9 @@ function CustomerPage({ onSearch }) {
       </Row>
 
       <CustomerList />
+      <Row className="mx-1">
+        <ModalCustomer />
+      </Row>
     </Container>
   );
 }
