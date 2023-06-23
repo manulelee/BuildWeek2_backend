@@ -14,8 +14,7 @@ import { Form } from "react-bootstrap";
 import CustomerLine from "./CustomerLine";
 
 function CustomerList() {
-  const key =
-    "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJjLnNhcmFAZ21haWwuY29tIiwiaWF0IjoxNjg3NTE5NjIyLCJleHAiOjE2ODgzODM2MjJ9.EnUASCMKoc8M1RF_nuLBeYkLKOksFHIVh5rHUT1ziWRw5tRFQcz_JuP7ufF5shGT";
+  const key = localStorage.getItem("token");
   const [customers, setCustomers] = useState([]);
 
   const [showFiltra, setShowFiltra] = useState(false);
@@ -56,7 +55,7 @@ function CustomerList() {
       const response = await fetch(url, {
         method: "GET",
         headers: {
-          Authorization: "Bearer " + key,
+          Authorization: key,
           "Content-Type": "application/json",
         },
       });
@@ -106,7 +105,7 @@ function CustomerList() {
       const response = await fetch(url, {
         method: "GET",
         headers: {
-          Authorization: "Bearer " + key,
+          Authorization: key,
           "Content-Type": "application/json",
         },
       });
@@ -261,13 +260,13 @@ function CustomerList() {
         <Col>
           <ListGroup className="border-3 border">
             <Row>
-              <Col>VAT Number</Col>
-              <Col>Legal Name</Col>
-              <Col>Legal Name</Col>
-              <Col>Legal Name</Col>
-              <Col>Legal Name</Col>
-              <Col>Legal Name</Col>
-              <Col>Legal Name</Col>
+              <Col>IVA</Col>
+              <Col>Nome Legale</Col>
+              <Col>Data di Registrazione</Col>
+              <Col>Ultimo Contatto</Col>
+              <Col>Reddito Annuale</Col>
+              <Col>Categoria</Col>
+              <Col></Col>
             </Row>
             {customers &&
               customers.map((customer) => (
