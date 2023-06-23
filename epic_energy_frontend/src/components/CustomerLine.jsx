@@ -1,4 +1,4 @@
-import { Col, Row, Button } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import ModalCustomer from "./ModalCustomer";
 
 function CustomerLine({ customer }) {
@@ -11,7 +11,7 @@ function CustomerLine({ customer }) {
         <p>{customer.legalName}</p>
       </Col>
       <Col>
-          <ModalCustomer customer={customer}></ModalCustomer>
+        <ModalCustomer customer={customer}></ModalCustomer>
       </Col>
     </Row>
   );

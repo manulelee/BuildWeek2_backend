@@ -8,6 +8,21 @@ import Col from "react-bootstrap/Col";
 import { Dropdown } from "react-bootstrap";
 
 function ModalCustomer({ customer }) {
+  const handleDelete = async () => {
+    try {
+      await fetch(`http://localhost:8080/api/customers/${customer.vatNumber}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        method: "DELETE",
+      });
+      handleClose();
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -16,6 +31,43 @@ function ModalCustomer({ customer }) {
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
+    let address = {
+      "LEGAL_SEAT": {
+        "id": 1,
+        "street": "Via Caruso",
+        "number": 542,
+        "locality": "quidem",
+        "zipCode": 21623,
+        "city": {
+          "id": 5545,
+          "cityName": "Sant'Eufemia a Maiella",
+          "province": {
+            "abbreviation": "PE",
+            "provinceName": "Pescara",
+            "region": "Abruzzo"
+          }
+        }
+      },
+      "OPERATIVE_SEAT": {
+        "id": 2,
+        "street": "Rotonda Nico",
+        "number": 422,
+        "locality": "consequuntur",
+        "zipCode": 80034,
+        "city": {
+          "id": 1554,
+          "cityName": "Caspoggio",
+          "province": {
+            "abbreviation": "SO",
+            "provinceName": "Sondrio",
+            "region": "Lombardia"
+          }
+        }
+      }
+    };
+    if (!customer.address) {
+      customer.address = address;
+    }
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
@@ -132,18 +184,6 @@ function ModalCustomer({ customer }) {
                   value={customer.contactPhone}
                 />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="category">
-                <Form.Label> Address</Form.Label>
-                <Form.Control required type="text" placeholder="Sede Legale" />
-              </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom02">
-                <Form.Label> Address</Form.Label>
-                <Form.Control
-                  required
-                  type="text"
-                  placeholder="Sede Operativa"
-                />
-              </Form.Group>
               <Dropdown className="d-inline mx-2">
                 <Dropdown.Toggle id="dropdown-autoclose-true">
                   Category
@@ -165,10 +205,21 @@ function ModalCustomer({ customer }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" type="submit">
-            Save Changes
-          </Button>
-          <Button>Delete Customer</Button>
+          {
+            !customer.legalName && (
+              <Button variant="primary" type="submit">
+                Create
+              </Button>
+            )
+          }
+          {
+            customer.legalName && (
+              <Button variant="primary" type="submit">
+                Edit
+              </Button>
+            )
+          }
+          <Button className="btn btn-danger" onClick={handleDelete}>Delete Customer</Button>
         </Modal.Footer>
       </Modal>
     </>
