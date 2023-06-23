@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
-import { Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 function LoginPage() {
   let loginDto = {
@@ -14,6 +14,7 @@ function LoginPage() {
   const [user, setUsername] = useState([]);
   const handleSubmit = (event) => {
     event.preventDefault();
+    getToken(loginDto);
   };
 
   const handlePassword = (event) => {
@@ -58,24 +59,18 @@ function LoginPage() {
 
       <Form onSubmit={handleSubmit} className="mt-5">
         <Form.Group className="mb-3 w-25 mx-auto" controlId="username" onChange={handleUsername}>
-          <Form.Control type="text" placeholder="insert username.." />
+          <Form.Control required type="text" placeholder="insert username.." />
         </Form.Group>
         <Form.Group className="mb-3 w-25 mx-auto" controlId="password" onChange={handlePassword}>
-          <Form.Control type="password" placeholder="insert password.." />
+          <Form.Control required type="password" placeholder="insert password.." />
         </Form.Group>
-        <button
-          type="submit"
-          className="btn btn-outline-warning my-2 w-25 "
-          onClick={() => {
-            getToken(loginDto);
-          }}
-        >
+        <Button type="submit" className="btn btn-dark btn-outline-warning my-2 w-25 ">
           Login
-        </button>
+        </Button>
       </Form>
 
       <button
-        type="submit"
+        type="button"
         className="btn btn-outline-success my-2 w-25 "
         onClick={() => {
           window.location.replace("/register");

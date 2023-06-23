@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
-import { Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 function RegisterPage() {
   let RegisterDto = {
@@ -17,6 +17,7 @@ function RegisterPage() {
   const [user, setUsername] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
+    register(RegisterDto);
   };
 
   const handleFirstName = (event) => {
@@ -83,15 +84,9 @@ function RegisterPage() {
         <Form.Group className="mb-3 w-25 mx-auto" controlId="password" onChange={handlePassword}>
           <Form.Control type="password" required placeholder="insert password.." />
         </Form.Group>
-        <button
-          type="submit"
-          className="btn btn-outline-success my-2 w-25 "
-          onClick={() => {
-            register(RegisterDto);
-          }}
-        >
+        <Button type="submit" className="btn btn-dark btn-outline-success my-2 w-25 ">
           Register
-        </button>
+        </Button>
       </Form>
     </div>
   );
