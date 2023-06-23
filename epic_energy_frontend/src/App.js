@@ -1,22 +1,25 @@
 import { Container } from "react-bootstrap";
 import "./App.css";
-import CustomerList from "./components/CustomerList";
+import "bootstrap/dist/css/bootstrap.min.css";
+import MyNavbar from "./components/MyNavbar";
+import CustomerPage from "./components/CustomerPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPage from "./components/LoginPage";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <Container fluid>
+        <MyNavbar />
         <BrowserRouter>
           <Routes>
-            <Route path="/login" element={<LoginPage />}></Route>
+            {/*
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />*/}
+            <Route path="/" element={<CustomerPage />} />
           </Routes>
         </BrowserRouter>
-        {/* <Container></Container>
-        <p>Salve</p>
-  <CustomerList></CustomerList>*/}
-      </header>
+      </Container>
     </div>
   );
 }
