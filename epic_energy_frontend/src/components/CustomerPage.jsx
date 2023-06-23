@@ -9,6 +9,8 @@ import {
   Row,
 } from "react-bootstrap";
 import CustomerList from "./CustomerList";
+import ModalCustomer from "./ModalCustomer";
+import ModalInvoice from "./ModalInvoice";
 import { useState } from "react";
 
 function CustomerPage({ onSearch }) {
@@ -44,6 +46,10 @@ function CustomerPage({ onSearch }) {
     <Container className="my-4 mx-2">
       <h1 className="mb-5">Registro Clienti</h1>
       <Row className="mx-1">
+        <Col>
+          <ModalCustomer />
+          <ModalInvoice />
+        </Col>
         <Col className="d-flex ">
           <DropdownButton id="dropdown-OrdinaPer" title="Ordina per">
             <Dropdown.Item href="#/action-1">Nome</Dropdown.Item>
