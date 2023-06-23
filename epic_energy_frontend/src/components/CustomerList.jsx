@@ -11,18 +11,14 @@ import {
 import { Container } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import CustomerLine from "./CustomerLine";
 
 function CustomerList() {
   const key =
-    "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzLmFuZHJvQGdtYWlsLmNvbSIsImlhdCI6MTY4NzUxMzgzNywiZXhwIjoxNjg4Mzc3ODM3fQ.qBng154OD71efE1ZMMj-e0pgUFclJ8SYhgxmnpiWfAAcs-hA9qfYQVE3EUqQxSk1";
-  const params = useParams();
+    "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJjLnNhcmFAZ21haWwuY29tIiwiaWF0IjoxNjg3NTE5NjIyLCJleHAiOjE2ODgzODM2MjJ9.EnUASCMKoc8M1RF_nuLBeYkLKOksFHIVh5rHUT1ziWRw5tRFQcz_JuP7ufF5shGT";
   const [customers, setCustomers] = useState([]);
 
   const [showFiltra, setShowFiltra] = useState(false);
-
-  const handleClose = () => setShowFiltra(false);
-  const handleShow = () => setShowFiltra(true);
 
   const [filters, setFilters] = useState({
     minAnnualIncome: "",
@@ -34,6 +30,17 @@ function CustomerList() {
     name: "",
   });
 
+  const [sortingField, setSortingField] = useState("legalName");
+  const [sortingDirection, setSortingDirection] = useState("ASC");
+
+  const handleSortingChange = (field, direction) => {
+    setSortingField(field);
+    setSortingDirection(direction);
+  };
+
+  const handleClose = () => setShowFiltra(false);
+  const handleShow = () => setShowFiltra(true);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFilters((prevFilters) => ({
@@ -43,7 +50,7 @@ function CustomerList() {
   };
 
   const getAllCustomers = async () => {
-    const url = "http://localhost:8080/api/customers";
+    const url = "http://localhost:8080/api/customers?sort=legalName,ASC";
 
     try {
       const response = await fetch(url, {
@@ -66,7 +73,7 @@ function CustomerList() {
   };
 
   const getFilteredCustomers = async () => {
-    let url = "http://localhost:8080/api/customers/filter";
+    let url = `http://localhost:8080/api/customers/filter?sort=${sortingField},${sortingDirection}`;
 
     const queryParams = [];
     if (filters.minAnnualIncome) {
@@ -92,7 +99,7 @@ function CustomerList() {
     }
 
     if (queryParams.length > 0) {
-      url += "?" + queryParams.join("&");
+      url += "&" + queryParams.join("&");
     }
 
     try {
@@ -121,25 +128,49 @@ function CustomerList() {
     getAllCustomers();
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
     getFilteredCustomers();
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters, sortingField, sortingDirection]);
 
   return (
     <Container>
       <Row className="mx-1">
         <Col className="d-flex ">
           <DropdownButton id="dropdown-OrdinaPer" title="Ordina per">
-            <Dropdown.Item href="#/action-1">Nome</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Fatturato Annuale</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Data Inserimento</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">
+            <Dropdown.Item
+              onClick={() => handleSortingChange("legalName", "ASC")}
+            >
+              Nome
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => handleSortingChange("annualIncome", "ASC")}
+            >
+              Fatturato Annuale
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => handleSortingChange("registrationDate", "ASC")}
+            >
+              Data Inserimento
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => handleSortingChange("lastContactDate", "ASC")}
+            >
               Data ultimo contatto
             </Dropdown.Item>
           </DropdownButton>
-          <Button className="btn-secondary">↑</Button>
-          <Button className="btn-secondary">↓</Button>
+          <Button
+            className="btn-secondary"
+            onClick={() => handleSortingChange(sortingField, "ASC")}
+          >
+            ↓
+          </Button>
+          <Button
+            className="btn-secondary"
+            onClick={() => handleSortingChange(sortingField, "DESC")}
+          >
+            ↑
+          </Button>
         </Col>
         <Col className="text-end">
           <Button variant="primary" onClick={handleShow}>
@@ -150,7 +181,7 @@ function CustomerList() {
               <Modal.Title>Filtri</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form onSubmit={handleSubmit}>
+              <Form>
                 <Form.Group controlId="minAnnualIncome">
                   <Form.Label>Min Annual Income</Form.Label>
                   <Form.Control
@@ -220,9 +251,7 @@ function CustomerList() {
                   />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
-                  Search
-                </Button>
+                <Button variant="primary">Apply</Button>
               </Form>
             </Modal.Body>
           </Modal>
@@ -231,17 +260,19 @@ function CustomerList() {
       <Row>
         <Col>
           <ListGroup className="border-3 border">
+            <Row>
+              <Col>VAT Number</Col>
+              <Col>Legal Name</Col>
+              <Col>Legal Name</Col>
+              <Col>Legal Name</Col>
+              <Col>Legal Name</Col>
+              <Col>Legal Name</Col>
+              <Col>Legal Name</Col>
+            </Row>
             {customers &&
               customers.map((customer) => (
                 <ListGroupItem key={customer.vatNumber}>
-                  <Row>
-                    <Col>
-                      <p>{customer.vatNumber}</p>
-                    </Col>
-                    <Col>
-                      <p>{customer.legalName}</p>
-                    </Col>
-                  </Row>
+                  <CustomerLine customer={customer} />
                 </ListGroupItem>
               ))}
           </ListGroup>

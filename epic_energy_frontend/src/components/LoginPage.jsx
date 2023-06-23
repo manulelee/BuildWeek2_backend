@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 function LoginPage() {
   let loginDto = {
@@ -40,7 +39,7 @@ function LoginPage() {
         let data = await response.json();
         console.log(data);
         token = data.accessToken;
-        localStorage.setItem("token", "Bearer" + " " + token);
+        localStorage.setItem("token", "Bearer " + token);
         window.location.replace("/customers");
       }
     } catch (error) {
@@ -49,15 +48,30 @@ function LoginPage() {
   };
 
   return (
-    <div className="modal show my-5" style={{ display: "block", height: "100vh", vhposition: "initial" }}>
-      <img src="https://epicode.com/wp-content/uploads/2022/06/EPICODE-2.0-LOGO-15.png" style={{ width: "30%" }}></img>
+    <div
+      className="modal show my-5"
+      style={{ display: "block", height: "100vh", vhposition: "initial" }}
+    >
+      <img
+        src="https://epicode.com/wp-content/uploads/2022/06/EPICODE-2.0-LOGO-15.png"
+        style={{ width: "30%" }}
+        alt="logo"
+      ></img>
       <p>Welcome on Epic Energy ⚡️</p>
 
       <Form onSubmit={handleSubmit} className="mt-5">
-        <Form.Group className="mb-3 w-25 mx-auto" controlId="username" onChange={handleUsername}>
+        <Form.Group
+          className="mb-3 w-25 mx-auto"
+          controlId="username"
+          onChange={handleUsername}
+        >
           <Form.Control type="text" placeholder="insert username.." />
         </Form.Group>
-        <Form.Group className="mb-3 w-25 mx-auto" controlId="password" onChange={handlePassword}>
+        <Form.Group
+          className="mb-3 w-25 mx-auto"
+          controlId="password"
+          onChange={handlePassword}
+        >
           <Form.Control type="password" placeholder="insert password.." />
         </Form.Group>
         <button
