@@ -1,6 +1,8 @@
 import { Container } from 'react-bootstrap';
 import './App.css';
 import CustomerList from './components/CustomerList';
+import ModalCustomer from './components/ModalCustomer';
+import ModalInvoice from './components/ModalInvoice';
 
 function App() {
   return (
@@ -9,6 +11,8 @@ function App() {
         <Container></Container>
         <p>Salve</p>
         <CustomerList></CustomerList>
+        <ModalCustomer></ModalCustomer>
+        <ModalInvoice></ModalInvoice>
       </header>
     </div>
   );
