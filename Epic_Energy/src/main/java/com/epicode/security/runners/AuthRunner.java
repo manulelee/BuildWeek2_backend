@@ -85,6 +85,7 @@ public class AuthRunner implements ApplicationRunner {
 			user.setRoles(userRole);
 			userRepository.save(user);
 		}
+
 	}
 
 }
