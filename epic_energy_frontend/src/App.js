@@ -5,6 +5,7 @@ import MyNavbar from "./components/MyNavbar";
 import CustomerPage from "./components/CustomerPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPage from "./components/LoginPage";
+import RegisterPage from "./components/RegisterPage";
 function App() {
   return (
     <div className="App">
@@ -12,9 +13,7 @@ function App() {
         <MyNavbar />
         <BrowserRouter>
           <Routes>
-            {/*
-          <Route path="/register" element={<RegisterPage />} />
-          */}
+            <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/customers" element={<CustomerPage />} />
           </Routes>
