@@ -6,22 +6,17 @@ function RegisterPage() {
   let RegisterDto = {
     firstname: "",
     lastname: "",
-    email: "",
     username: "",
+    email: "",
     password: "",
   };
-  const [firstName, setFirstName] = useState([]);
-  const [lastName, setLastName] = useState([]);
-  const [email, setEmail] = useState([]);
-  const [pass, setPassword] = useState([]);
-  const [user, setUsername] = useState([]);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [pass, setPassword] = useState("");
+  const [user, setUsername] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
-    RegisterDto.fisrtname = firstName;
-    RegisterDto.lastname = lastName;
-    RegisterDto.email = email;
-    RegisterDto.username = user;
-    RegisterDto.password = pass;
   };
 
   const handleFirstName = (event) => {
@@ -42,6 +37,11 @@ function RegisterPage() {
   };
 
   const register = async (RegisterDto) => {
+    RegisterDto.firstname = firstName;
+    RegisterDto.lastname = lastName;
+    RegisterDto.username = user;
+    RegisterDto.email = email;
+    RegisterDto.password = pass;
     try {
       let response = await fetch("http://localhost:8080/api/auth/register", {
         method: "POST",
@@ -50,19 +50,21 @@ function RegisterPage() {
           "Content-Type": "application/json",
         },
       });
-      if (response.ok) {
-        let data = await response.json();
-        console.log(data);
+      if (response.status === 201) {
         window.location.replace("/login");
       }
     } catch (error) {
-      console.log(error);
+      console.log("ERRORE: " + error);
     }
   };
 
   return (
     <div className="py-5 bg-dark" style={{ display: "block", height: "100vh", vhposition: "initial" }}>
-      <img src="https://epicode.com/wp-content/uploads/2022/06/EPICODE-2.0-LOGO-15.png" style={{ width: "30%" }}></img>
+      <img
+        src="https://epicode.com/wp-content/uploads/2022/06/EPICODE-2.0-LOGO-15.png"
+        style={{ width: "30%" }}
+        alt="epicode Logo"
+      ></img>
       <p className="text-light">New user? Register now on Epic Energy ⚡️</p>
 
       <Form onSubmit={handleSubmit} className="mt-5">
@@ -83,7 +85,7 @@ function RegisterPage() {
         </Form.Group>
         <button
           type="submit"
-          className="btn btn-outline-warning my-2 w-25 "
+          className="btn btn-outline-success my-2 w-25 "
           onClick={() => {
             register(RegisterDto);
           }}

@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 function LoginPage() {
   let loginDto = {
@@ -15,8 +14,6 @@ function LoginPage() {
   const [user, setUsername] = useState([]);
   const handleSubmit = (event) => {
     event.preventDefault();
-    loginDto.username = user;
-    loginDto.password = pass;
   };
 
   const handlePassword = (event) => {
@@ -28,6 +25,8 @@ function LoginPage() {
   };
 
   const getToken = async (loginDto) => {
+    loginDto.username = user;
+    loginDto.password = pass;
     try {
       let response = await fetch("http://localhost:8080/api/auth/login", {
         method: "POST",
@@ -50,7 +49,11 @@ function LoginPage() {
 
   return (
     <div className="py-5 bg-dark" style={{ display: "block", height: "100vh", vhposition: "initial" }}>
-      <img src="https://epicode.com/wp-content/uploads/2022/06/EPICODE-2.0-LOGO-15.png" style={{ width: "30%" }}></img>
+      <img
+        src="https://epicode.com/wp-content/uploads/2022/06/EPICODE-2.0-LOGO-15.png"
+        style={{ width: "30%" }}
+        alt="epicode Logo"
+      ></img>
       <p className="text-light">Welcome on Epic Energy ⚡️</p>
 
       <Form onSubmit={handleSubmit} className="mt-5">
@@ -65,7 +68,6 @@ function LoginPage() {
           className="btn btn-outline-warning my-2 w-25 "
           onClick={() => {
             getToken(loginDto);
-            //   window.location.replace("/");
           }}
         >
           Login
@@ -76,7 +78,7 @@ function LoginPage() {
         type="submit"
         className="btn btn-outline-success my-2 w-25 "
         onClick={() => {
-          // window.location.replace("/register");
+          window.location.replace("/register");
         }}
       >
         Register now!
